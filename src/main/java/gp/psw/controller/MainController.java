@@ -20,7 +20,9 @@ public class MainController {
 
         StringBuilder sb = new StringBuilder();
 
-        all.forEach(p -> sb.append(p.getName() + "<br>"));
+        sb.append("<table border=1>");
+        all.forEach(p -> sb.append("<tr>" + p.getName() + "</tr>"));
+        sb.append("</table>");
 
         return sb.toString();
     }
