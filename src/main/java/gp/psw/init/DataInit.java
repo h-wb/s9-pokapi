@@ -30,6 +30,10 @@ public class DataInit implements ApplicationRunner {
             p2.setName("Salamèche");
             p2.setType("Feu");
 
+            Pokemon p4 = new Pokemon();
+            p4.setName("Reptincel");
+            p4.setType("Feu");
+
             Pokemon p3 = new Pokemon();
             p3.setName("Carapuce");
             p3.setType("Eau");
@@ -37,6 +41,7 @@ public class DataInit implements ApplicationRunner {
             pokemonDAO.save(p1);
             pokemonDAO.save(p2);
             pokemonDAO.save(p3);
+            pokemonDAO.save(p4);
         }
     }
 }

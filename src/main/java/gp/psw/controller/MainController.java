@@ -1,4 +1,4 @@
-package gp.psw;
+package gp.psw.controller;
 
 import gp.psw.dao.PokemonDAO;
 import gp.psw.entity.Pokemon;
