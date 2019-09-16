@@ -30,10 +30,21 @@ public class Pokemon {
         this.type = type;
     }
 
+    public Integer getPokedexId() {
+        return pokedexId;
+    }
+
+    public void setPokedexId(Integer pokedexId) {
+        this.pokedexId = pokedexId;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "Id", nullable = false)
     private Long id;
+
+    @Column(name = "pokedexId", nullable = false)
+    private Integer pokedexId;
 
     @Column(name = "name", length = 64, nullable = false)
     private String name;

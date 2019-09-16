@@ -20,6 +20,12 @@ public class PokemonController {
         return pokemonDAO.getById(Id);
     }
 
+    @RequestMapping(value = "/pokemon/pokedex/{PokedexId}", method = RequestMethod.GET)
+    @ResponseBody
+    Pokemon getPokemonByPokedexId(@PathVariable final Integer PokedexId){
+        return pokemonDAO.getByPokedexId(PokedexId);
+    }
+
     @RequestMapping(value = "/pokemon/type/{Type}", method = RequestMethod.GET)
     @ResponseBody
     List<Pokemon> getPokemonByType(@PathVariable final String Type) {

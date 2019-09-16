@@ -14,4 +14,6 @@ public interface PokemonDAO extends CrudRepository<Pokemon, Long> {
     public List<Pokemon> findByType(String type);
 
     public Pokemon getById(Long id);
+
+    public Pokemon getByPokedexId(Integer pokedexId);
 }
