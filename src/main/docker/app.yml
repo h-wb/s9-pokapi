@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   CHANGEZMOILENOMDUGROUPE:
-    image: m2gi/g3:0.0.1-SNAPSHOT
+    image: m2gi/groupe3:0.0.1-SNAPSHOT
     networks:
       #network pour traefik
       - 'traefik-public'
@@ -13,7 +13,7 @@ services:
       restart_policy:
         max_attempts: 5
       labels:
-        - traefik.frontend.rule=Host:g3.m2gi.win
+        - traefik.frontend.rule=Host:groupe3.m2gi.win
         - traefik.enable=true
         - traefik.port=8080
         - traefik.tags=traefik-public
