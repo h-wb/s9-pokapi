@@ -1,0 +1,32 @@
+version: '3.5'
+services:
+  CHANGEZMOILENOMDUGROUPE:
+    image: m2gi/g3:0.0.1-SNAPSHOT
+    networks:
+      #network pour traefik
+      - 'traefik-public'
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        order: start-first
+      restart_policy:
+        max_attempts: 5
+      labels:
+        - traefik.frontend.rule=Host:g3.m2gi.win
+        - traefik.enable=true
+        - traefik.port=8080
+        - traefik.tags=traefik-public
+        - traefik.docker.network=traefik-public
+        # Traefik service that listens to HTTP
+        - traefik.redirectorservice.frontend.entryPoints=http
+        - traefik.redirectorservice.frontend.redirect.entryPoint=https
+        # Traefik service that listens to HTTPS
+        - traefik.webservice.frontend.entryPoints=https
+    depends_on:
+      - traefik
+
+
+networks:
+  traefik-public:
+    external: true
