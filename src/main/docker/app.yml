@@ -1,6 +1,6 @@
 version: '3.5'
 services:
-  CHANGEZMOILENOMDUGROUPE:
+  groupe3:
     image: m2gi/groupe3:0.0.1-SNAPSHOT
     networks:
       #network pour traefik
