@@ -6,10 +6,8 @@ import gp.psw.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,15 +46,8 @@ public class PokemonController {
 
     @PostMapping("/pokemon")
     @ResponseBody
-    public ResponseEntity<Object> createPokemon(@RequestBody Pokemon pokemon, @PathVariable final long Id) {
-        Pokemon newPokemon = pokemonDAO.save(pokemon);
-
-        newPokemon.setId(Id);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{Id}")
-                .buildAndExpand(newPokemon.getId()).toUri();
-
-        return ResponseEntity.created(location).build();
+    public Pokemon createPokemon(@Valid @RequestBody Pokemon pokemon) {
+        return pokemonDAO.save(pokemon);
     }
 
     @PutMapping("/pokemon/{Id}")

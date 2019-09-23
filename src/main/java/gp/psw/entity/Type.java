@@ -9,8 +9,15 @@ public class Type {
     private Long id;
     private String name;
 
+    public Type() {
+    }
+
+    public Type(String name) {
+        this.name = name;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }

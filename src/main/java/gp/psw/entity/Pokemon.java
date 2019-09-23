@@ -8,9 +8,18 @@ public class Pokemon {
 
     private Long id;
     private String name;
+    private Long idPokedex;
+
+    public Pokemon() {
+    }
+
+    public Pokemon(String name, Long idPokedex) {
+        this.name = name;
+        this.idPokedex = idPokedex;
+    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -26,5 +35,14 @@ public class Pokemon {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(name = "id_pokedex", nullable = false)
+    public Long getIdPokedex() {
+        return idPokedex;
+    }
+
+    public void setIdPokedex(Long idPokedex) {
+        this.idPokedex = idPokedex;
     }
 }
