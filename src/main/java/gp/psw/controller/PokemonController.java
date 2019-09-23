@@ -37,7 +37,6 @@ public class PokemonController {
     @DeleteMapping(value = "/pokemon/{Id}")
     @ResponseBody
     Map<String, Boolean> deletePokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
-        pokemonDAO.deleteById(Id);
         Pokemon pokemon = pokemonDAO.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
 
