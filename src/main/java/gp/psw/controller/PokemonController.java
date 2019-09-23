@@ -57,6 +57,7 @@ public class PokemonController {
                 .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
 
         pokemon.setName(pokemonDetails.getName());
+        pokemon.setIdPokedex(pokemonDetails.getIdPokedex());
         final Pokemon updatedPokemon = pokemonDAO.save(pokemon);
         return ResponseEntity.ok(updatedPokemon);
     }
