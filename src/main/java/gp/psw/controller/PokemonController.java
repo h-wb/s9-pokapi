@@ -2,18 +2,17 @@ package gp.psw.controller;
 
 import gp.psw.dao.PokemonDAO;
 import gp.psw.entity.Pokemon;
-import org.hibernate.ObjectNotFoundException;
+import gp.psw.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
-import java.util.MissingResourceException;
-import java.util.Optional;
+import java.util.Map;
 
 @RestController
 public class PokemonController {
@@ -21,43 +20,51 @@ public class PokemonController {
     @Autowired
     private PokemonDAO pokemonDAO;
 
-    @RequestMapping(value = "/pokemon/{Id}", method = RequestMethod.GET)
+    @GetMapping(value = "/pokemon")
     @ResponseBody
-    Optional<Pokemon> getPokemonById(@PathVariable final Long Id) {
-        return pokemonDAO.findById(Id);
-    }
-
-    @RequestMapping(value = "/pokemon", method = RequestMethod.GET)
-    @ResponseBody
-    List<Pokemon> getAll() {
+    List<Pokemon> getAllPokemons() {
         return pokemonDAO.findAll();
     }
 
-    @RequestMapping(value = "/pokemon/{Id}", method = RequestMethod.DELETE)
+    @GetMapping(value = "/pokemon/{Id}")
     @ResponseBody
-    void deletePokemonById(@PathVariable final Long Id) {
-        pokemonDAO.deleteById(Id);
+    ResponseEntity<Pokemon> getPokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
+        Pokemon pokemon = pokemonDAO.findById(Id)
+                .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
+        return ResponseEntity.ok().body(pokemon);
     }
 
-   @PostMapping("/pokemon")
-   @ResponseBody
-    public ResponseEntity<Object> createStudent(@RequestBody Pokemon pokemon, @PathVariable final long Id) {
+    @DeleteMapping(value = "/pokemon/{Id}")
+    @ResponseBody
+    Map<String, Boolean> deletePokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
+        pokemonDAO.deleteById(Id);
+        Pokemon pokemon = pokemonDAO.findById(Id)
+                .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
+
+        pokemonDAO.delete(pokemon);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
+    }
+
+    @PostMapping("/pokemon")
+    @ResponseBody
+    public ResponseEntity<Object> createPokemon(@RequestBody Pokemon pokemon, @PathVariable final long Id) {
         Pokemon newPokemon = pokemonDAO.save(pokemon);
 
         newPokemon.setId(Id);
-        
+
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{Id}")
                 .buildAndExpand(newPokemon.getId()).toUri();
 
         return ResponseEntity.created(location).build();
-
     }
 
     @PutMapping("/pokemon/{Id}")
     @ResponseBody
-    public ResponseEntity<Object> updateStudent(@Valid @RequestBody Pokemon pokemonDetails, @PathVariable final long Id) {
+    public ResponseEntity<Object> updatePokemon(@Valid @RequestBody Pokemon pokemonDetails, @PathVariable final long Id) throws ResourceNotFoundException {
         Pokemon pokemon = pokemonDAO.findById(Id)
-                .orElseThrow(() -> new ObjectNotFoundException("Pokemon not found for this id :: " + Id,Pokemon.class.getName()));
+                .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
 
         pokemon.setName(pokemonDetails.getName());
         final Pokemon updatedPokemon = pokemonDAO.save(pokemon);
