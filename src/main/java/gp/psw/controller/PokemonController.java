@@ -3,10 +3,13 @@ package gp.psw.controller;
 import gp.psw.dao.PokemonDAO;
 import gp.psw.entity.Pokemon;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class PokemonController {
@@ -16,19 +19,47 @@ public class PokemonController {
 
     @RequestMapping(value = "/pokemon/{Id}", method = RequestMethod.GET)
     @ResponseBody
-    Pokemon getPokemonById(@PathVariable final Long Id) {
-        return pokemonDAO.getById(Id);
+    Optional<Pokemon> getPokemonById(@PathVariable final Long Id) {
+        return pokemonDAO.findById(Id);
     }
 
-    @RequestMapping(value = "/pokemon/pokedex/{PokedexId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/pokemon", method = RequestMethod.GET)
     @ResponseBody
-    Pokemon getPokemonByPokedexId(@PathVariable final Integer PokedexId){
-        return pokemonDAO.getByPokedexId(PokedexId);
+    List<Pokemon> getAll() {
+        return pokemonDAO.findAll();
     }
 
-    @RequestMapping(value = "/pokemon/type/{Type}", method = RequestMethod.GET)
+    @RequestMapping(value = "/pokemon/{Id}", method = RequestMethod.DELETE)
     @ResponseBody
-    List<Pokemon> getPokemonByType(@PathVariable final String Type) {
-        return pokemonDAO.findByType(Type);
+    void deletePokemonById(@PathVariable final Long Id) {
+        pokemonDAO.deleteById(Id);
+    }
+
+   @PostMapping("/pokemon")
+    public ResponseEntity<Object> createStudent(@RequestBody Pokemon pokemon, @PathVariable final long Id) {
+        Pokemon newPokemon = pokemonDAO.save(pokemon);
+
+        newPokemon.setId(Id);
+        
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{Id}")
+                .buildAndExpand(newPokemon.getId()).toUri();
+
+        return ResponseEntity.created(location).build();
+
+    }
+
+    @PutMapping("/pokemon/{Id}")
+    public ResponseEntity<Object> updateStudent(@RequestBody Pokemon pokemon, @PathVariable final long Id) {
+
+        Optional<Pokemon> studentOptional = pokemonDAO.findById(Id);
+
+        if (!studentOptional.isPresent())
+            return ResponseEntity.notFound().build();
+
+        pokemon.setId(Id);
+
+        pokemonDAO.save(pokemon);
+
+        return ResponseEntity.noContent().build();
     }
 }
