@@ -14,17 +14,16 @@ import java.util.Map;
 
 @RestController
 public class PokemonController {
-
     @Autowired
     private PokemonDAO pokemonDAO;
 
-    @GetMapping(value = "/pokemon")
+    @GetMapping("/pokemons")
     @ResponseBody
     List<Pokemon> getAllPokemons() {
         return pokemonDAO.findAll();
     }
 
-    @GetMapping(value = "/pokemon/{Id}")
+    @GetMapping("/pokemons/{Id}")
     @ResponseBody
     ResponseEntity<Pokemon> getPokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
         Pokemon pokemon = pokemonDAO.findById(Id)
@@ -32,7 +31,7 @@ public class PokemonController {
         return ResponseEntity.ok().body(pokemon);
     }
 
-    @DeleteMapping(value = "/pokemon/{Id}")
+    @DeleteMapping("/pokemons/{Id}")
     @ResponseBody
     Map<String, Boolean> deletePokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
         Pokemon pokemon = pokemonDAO.findById(Id)
@@ -44,15 +43,15 @@ public class PokemonController {
         return response;
     }
 
-    @PostMapping("/pokemon")
+    @PostMapping("/pokemons")
     @ResponseBody
     public Pokemon createPokemon(@Valid @RequestBody Pokemon pokemon) {
         return pokemonDAO.save(pokemon);
     }
 
-    @PutMapping("/pokemon/{Id}")
+    @PutMapping("/pokemons/{Id}")
     @ResponseBody
-    public ResponseEntity<Object> updatePokemon(@Valid @RequestBody Pokemon pokemonDetails, @PathVariable final long Id) throws ResourceNotFoundException {
+    public ResponseEntity<Object> updatePokemon(@PathVariable final long Id, @Valid @RequestBody Pokemon pokemonDetails) throws ResourceNotFoundException {
         Pokemon pokemon = pokemonDAO.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
 
