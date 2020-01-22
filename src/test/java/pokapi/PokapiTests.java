@@ -1,4 +1,4 @@
-package gp.psw;
+package pokapi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PswApplicationTests {
+public class PokapiTests {
 
 	@Test
 	public void contextLoads() {

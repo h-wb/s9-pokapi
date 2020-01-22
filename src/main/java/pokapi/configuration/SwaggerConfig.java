@@ -1,4 +1,4 @@
-package gp.psw.configuration;
+package pokapi.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

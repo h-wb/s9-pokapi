@@ -1,9 +1,8 @@
-package gp.psw.controller;
+package pokapi.controller;
 
-import gp.psw.repository.TypeRepository;
-import gp.psw.entity.Type;
-import gp.psw.exception.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import pokapi.repository.TypeRepository;
+import pokapi.entity.Type;
+import pokapi.exception.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

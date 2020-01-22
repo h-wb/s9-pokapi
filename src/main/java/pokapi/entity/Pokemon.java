@@ -1,19 +1,21 @@
-package gp.psw.entity;
+package pokapi.entity;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TYPE")
-public class Type {
+@Table(name = "POKEMON")
+public class Pokemon {
 
     private Long id;
     private String name;
+    private Long idPokedex;
 
-    public Type() {
+    public Pokemon() {
     }
 
-    public Type(String name) {
+    public Pokemon(String name, Long idPokedex) {
         this.name = name;
+        this.idPokedex = idPokedex;
     }
 
     @Id
@@ -33,5 +35,14 @@ public class Type {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(name = "id_pokedex", nullable = false)
+    public Long getIdPokedex() {
+        return idPokedex;
+    }
+
+    public void setIdPokedex(Long idPokedex) {
+        this.idPokedex = idPokedex;
     }
 }

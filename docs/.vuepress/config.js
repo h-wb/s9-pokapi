@@ -35,12 +35,12 @@ const sidebars = {
 }
 
 module.exports = {
-    base: '/api-psw/',
+    base: '/Pokapi/',
     title: 'VuePress in Github Pages',
     description: 'Static website built with VuePress and deployed on Github Pages',
 
     themeConfig: {
-        repo: 'h-wb/api-psw',
+        repo: 'h-wb/Pokapi',
         docsDir: 'docs',
         sidebarDepth: 2,
 
@@ -54,7 +54,7 @@ module.exports = {
             },
             {
                 text: 'Release Notes',
-                link: 'https://github.com/h-wb/api-psw/releases'
+                link: 'https://github.com/h-wb/Pokapi/releases'
             }
         ],
 

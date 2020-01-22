@@ -1,6 +1,6 @@
-package gp.psw.repository;
+package pokapi.repository;
 
-import gp.psw.entity.Pokemon;
+import pokapi.entity.Pokemon;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

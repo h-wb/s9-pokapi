@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>gp</groupId>
-    <artifactId>psw</artifactId>
+    <artifactId>Pokapi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>psw</name>
-    <description>API GP</description>
+    <name>Pokapi</name>
+    <description>API Pokemon créée dans le cadre du M2 GI</description>
 
     <repositories>
         <repository>

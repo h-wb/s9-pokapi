@@ -1,7 +1,7 @@
-package gp.psw;
+package pokapi;
 
-import gp.psw.configuration.SwaggerConfig;
-import gp.psw.repository.PokemonRepository;
+import pokapi.configuration.SwaggerConfig;
+import pokapi.repository.PokemonRepository;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;

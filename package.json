@@ -1,6 +1,6 @@
 {
-  "name": "api-psw",
-  "version": "1.0.0",
+  "name": "Pokapi",
+  "version": "0.0.1-SNAPSHOT",
   "description": "",
   "main": "index.js",
   "dependencies": {
@@ -9,17 +9,17 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "vuepress dev docs",
+    "dev": "vuepress dev docs",
     "build": "vuepress build docs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/h-wb/api-psw.git"
+    "url": "git+https://github.com/h-wb/Pokapi.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/h-wb/api-psw/issues"
+    "url": "https://github.com/h-wb/Pokapi/issues"
   },
-  "homepage": "https://github.com/h-wb/api-psw#readme"
+  "homepage": "https://github.com/h-wb/Pokapi#readme"
 }

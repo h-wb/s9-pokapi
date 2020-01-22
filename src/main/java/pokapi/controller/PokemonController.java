@@ -1,8 +1,8 @@
-package gp.psw.controller;
+package pokapi.controller;
 
-import gp.psw.repository.PokemonRepository;
-import gp.psw.entity.Pokemon;
-import gp.psw.exception.ResourceNotFoundException;
+import pokapi.repository.PokemonRepository;
+import pokapi.entity.Pokemon;
+import pokapi.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
