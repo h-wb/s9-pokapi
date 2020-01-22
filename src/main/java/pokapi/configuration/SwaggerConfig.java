@@ -12,27 +12,28 @@ import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import static springfox.documentation.builders.PathSelectors.regex;
+
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
     @Bean
     public Docket api(ApiInfo apiInfo) {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("user-api")
+                .groupName("pokapi")
                 .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo)
                 .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
+                .paths(regex("/api/.*"))
                 .build();
     }
 
     @Bean
     public ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("User API")
-                .description("API for fetching user related information")
-                .version("1.0.0")
+                .title("Pokapi")
+                .description("API Pokemon créée dans le cadre du M2 GI")
+                .version("0.0.1")
                 .build();
     }
 

@@ -36,8 +36,8 @@ const sidebars = {
 
 module.exports = {
     base: '/Pokapi/',
-    title: 'VuePress in Github Pages',
-    description: 'Static website built with VuePress and deployed on Github Pages',
+    title: 'Pokapi',
+    description: 'API Pokemon créée dans le cadre du M2 GI',
 
     themeConfig: {
         repo: 'h-wb/Pokapi',
@@ -49,7 +49,7 @@ module.exports = {
             link: '/guide/test'
         },
             {
-                text: 'API Reference',
+                text: 'API',
                 link: '/api/overview'
             },
             {

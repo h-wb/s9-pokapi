@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import pokapi.repository.TypeRepository;
 
 
 import java.io.File;
@@ -28,14 +29,16 @@ public class SwaggerAPIIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private PokemonRepository repository;
+    private PokemonRepository pokemonRepository;
+    @MockBean
+    private TypeRepository typeRepository;
 
     @Test
     public void swaggerJsonExists() throws Exception {
         String contentAsString = mockMvc
                 .perform(MockMvcRequestBuilders.get("/v2/api-docs")
                         .accept(MediaType.APPLICATION_JSON)
-                        .param("group", "user-api"))
+                        .param("group", "pokapi"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse().getContentAsString();

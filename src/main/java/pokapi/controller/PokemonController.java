@@ -1,9 +1,11 @@
 package pokapi.controller;
 
-import pokapi.repository.PokemonRepository;
-import pokapi.entity.Pokemon;
-import pokapi.exception.ResourceNotFoundException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import pokapi.entity.PokemonEntity;
+import pokapi.repository.PokemonRepository;
+import pokapi.exception.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,51 +15,63 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api/pokemon")
+@Api(value = "Pokémons", tags = "pokemon")
 public class PokemonController {
+    private final PokemonRepository pokemonRepository;
+
     @Autowired
-    private PokemonRepository pokemonRepository;
-
-    @GetMapping("/pokemons")
-    @ResponseBody
-    List<Pokemon> getAllPokemons() {
-        return pokemonRepository.findAll();
+    public PokemonController(PokemonRepository pokemonRepository){
+        this.pokemonRepository = pokemonRepository;
     }
 
-    @GetMapping("/pokemons/{Id}")
+    @ApiOperation(value= "Récuperer tous les pokémons")
+    @GetMapping("/all")
     @ResponseBody
-    ResponseEntity<Pokemon> getPokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
-        Pokemon pokemon = pokemonRepository.findById(Id)
+    List<PokemonEntity> getAllPokemons() {
+        return (List<PokemonEntity>) pokemonRepository.findAll();
+    }
+
+    @ApiOperation(value= "Créer un pokémon")
+    @PostMapping("/new")
+    @ResponseBody
+    public PokemonEntity createPokemon(@Valid @RequestBody PokemonEntity pokemonEntity) {
+        return pokemonRepository.save(pokemonEntity);
+    }
+
+    @ApiOperation(value= "Récupérer un pokémon par id")
+    @GetMapping("/{Id}")
+    @ResponseBody
+    ResponseEntity<PokemonEntity> getPokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
+        PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
-        return ResponseEntity.ok().body(pokemon);
+        return ResponseEntity.ok().body(pokemonEntity);
     }
 
-    @DeleteMapping("/pokemons/{Id}")
+    @ApiOperation(value= "Supprimer un pokémon par id")
+    @DeleteMapping("/{Id}")
     @ResponseBody
     Map<String, Boolean> deletePokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
-        Pokemon pokemon = pokemonRepository.findById(Id)
+        PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
 
-        pokemonRepository.delete(pokemon);
+        pokemonRepository.delete(pokemonEntity);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
     }
 
-    @PostMapping("/pokemons")
+    @ApiOperation(value= "Modifier un pokémon par id")
+    @PutMapping("/{Id}")
     @ResponseBody
-    public Pokemon createPokemon(@Valid @RequestBody Pokemon pokemon) {
-        return pokemonRepository.save(pokemon);
-    }
-
-    @PutMapping("/pokemons/{Id}")
-    @ResponseBody
-    public ResponseEntity<Object> updatePokemon(@PathVariable final long Id, @Valid @RequestBody Pokemon pokemonDetails) throws ResourceNotFoundException {
-        Pokemon pokemon = pokemonRepository.findById(Id)
+    public ResponseEntity<Object> updatePokemon(@PathVariable final long Id, @Valid @RequestBody PokemonEntity pokemonEntityDetails) throws ResourceNotFoundException {
+        PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
 
-        pokemon.setName(pokemonDetails.getName());
-        pokemon.setIdPokedex(pokemonDetails.getIdPokedex());
-        final Pokemon updatedPokemon = pokemonRepository.save(pokemon);
-        return ResponseEntity.ok(updatedPokemon);
+        pokemonEntity.setName(pokemonEntityDetails.getName());
+        pokemonEntity.setIdPokedex(pokemonEntityDetails.getIdPokedex());
+        final PokemonEntity updatedPokemonEntity = pokemonRepository.save(pokemonEntity);
+        return ResponseEntity.ok(updatedPokemonEntity);
     }
+
 }

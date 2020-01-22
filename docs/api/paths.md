@@ -2,10 +2,10 @@
 <a name="paths"></a>
 ## Paths
 
-<a name="indexusingpost"></a>
-### index
+<a name="getallpokemonsusingget"></a>
+### Récuperer tous les pokémons
 ```
-POST /
+GET /api/pokemon/all
 ```
 
 
@@ -13,12 +13,7 @@ POST /
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|string|
-
-
-#### Consumes
-
-* `application/json`
+|**200**|OK|< [PokemonEntity](#pokemonentity) > array|
 
 
 #### Produces
@@ -28,370 +23,13 @@ POST /
 
 #### Tags
 
-* main-controller
-
-
-<a name="indexusingget"></a>
-### index
-```
-GET /
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|string|
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* main-controller
-
-
-<a name="indexusingput"></a>
-### index
-```
-PUT /
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|string|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* main-controller
-
-
-<a name="indexusingdelete"></a>
-### index
-```
-DELETE /
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|string|
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* main-controller
-
-
-<a name="indexusingpatch"></a>
-### index
-```
-PATCH /
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|string|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* main-controller
-
-
-<a name="indexusinghead"></a>
-### index
-```
-HEAD /
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|string|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* main-controller
-
-
-<a name="indexusingoptions"></a>
-### index
-```
-OPTIONS /
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|string|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* main-controller
-
-
-<a name="errorhtmlusingpost"></a>
-### errorHtml
-```
-POST /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingget"></a>
-### errorHtml
-```
-GET /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingput"></a>
-### errorHtml
-```
-PUT /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingdelete"></a>
-### errorHtml
-```
-DELETE /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingpatch"></a>
-### errorHtml
-```
-PATCH /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusinghead"></a>
-### errorHtml
-```
-HEAD /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingoptions"></a>
-### errorHtml
-```
-OPTIONS /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
+* pokemon
 
 
 <a name="createpokemonusingpost"></a>
-### createPokemon
+### Créer un pokémon
 ```
-POST /pokemons
+POST /api/pokemon/new
 ```
 
 
@@ -399,14 +37,14 @@ POST /pokemons
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Body**|**pokemon**  <br>*required*|pokemon|[Pokemon](#pokemon)|
+|**Body**|**pokemonEntity**  <br>*required*|pokemonEntity|[PokemonEntity](#pokemonentity)|
 
 
 #### Responses
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|[Pokemon](#pokemon)|
+|**200**|OK|[PokemonEntity](#pokemonentity)|
 
 
 #### Consumes
@@ -421,37 +59,13 @@ POST /pokemons
 
 #### Tags
 
-* pokemon-controller
-
-
-<a name="getallpokemonsusingget"></a>
-### getAllPokemons
-```
-GET /pokemons
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|< [Pokemon](#pokemon) > array|
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* pokemon-controller
+* pokemon
 
 
 <a name="getpokemonbyidusingget"></a>
-### getPokemonById
+### Récupérer un pokémon par id
 ```
-GET /pokemons/{Id}
+GET /api/pokemon/{Id}
 ```
 
 
@@ -466,7 +80,7 @@ GET /pokemons/{Id}
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|[Pokemon](#pokemon)|
+|**200**|OK|[PokemonEntity](#pokemonentity)|
 
 
 #### Produces
@@ -476,13 +90,13 @@ GET /pokemons/{Id}
 
 #### Tags
 
-* pokemon-controller
+* pokemon
 
 
 <a name="updatepokemonusingput"></a>
-### updatePokemon
+### Modifier un pokémon par id
 ```
-PUT /pokemons/{Id}
+PUT /api/pokemon/{Id}
 ```
 
 
@@ -491,7 +105,7 @@ PUT /pokemons/{Id}
 |Type|Name|Description|Schema|
 |---|---|---|---|
 |**Path**|**Id**  <br>*required*|Id|integer (int64)|
-|**Body**|**pokemonDetails**  <br>*required*|pokemonDetails|[Pokemon](#pokemon)|
+|**Body**|**pokemonEntityDetails**  <br>*required*|pokemonEntityDetails|[PokemonEntity](#pokemonentity)|
 
 
 #### Responses
@@ -513,13 +127,13 @@ PUT /pokemons/{Id}
 
 #### Tags
 
-* pokemon-controller
+* pokemon
 
 
 <a name="deletepokemonbyidusingdelete"></a>
-### deletePokemonById
+### Supprimer un pokémon par id
 ```
-DELETE /pokemons/{Id}
+DELETE /api/pokemon/{Id}
 ```
 
 
@@ -544,13 +158,37 @@ DELETE /pokemons/{Id}
 
 #### Tags
 
-* pokemon-controller
+* pokemon
+
+
+<a name="getalltypesusingget"></a>
+### Récuperer tous les type de pokémons
+```
+GET /api/type/all
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [TypeEntity](#typeentity) > array|
+
+
+#### Produces
+
+* `*/*`
+
+
+#### Tags
+
+* type
 
 
 <a name="createtypeusingpost"></a>
-### createType
+### Créer un type de pokémon
 ```
-POST /types
+POST /api/type/new
 ```
 
 
@@ -558,14 +196,14 @@ POST /types
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Body**|**type**  <br>*required*|type|[Type](#type)|
+|**Body**|**typeEntity**  <br>*required*|typeEntity|[TypeEntity](#typeentity)|
 
 
 #### Responses
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|[Type](#type)|
+|**200**|OK|[TypeEntity](#typeentity)|
 
 
 #### Consumes
@@ -580,37 +218,13 @@ POST /types
 
 #### Tags
 
-* type-controller
-
-
-<a name="getalltypesusingget"></a>
-### getAllTypes
-```
-GET /types
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[Iterable«Type»](#9c3627461f0d3a843a0e61623d3d6b8d)|
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* type-controller
+* type
 
 
 <a name="gettypebyidusingget"></a>
-### getTypeById
+### Récupérer un type de pokémon par id
 ```
-GET /types/{Id}
+GET /api/type/{Id}
 ```
 
 
@@ -625,7 +239,7 @@ GET /types/{Id}
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|[Type](#type)|
+|**200**|OK|[TypeEntity](#typeentity)|
 
 
 #### Produces
@@ -635,13 +249,13 @@ GET /types/{Id}
 
 #### Tags
 
-* type-controller
+* type
 
 
 <a name="updatetypeusingput"></a>
-### updateType
+### Modifier un type de pokémon par id
 ```
-PUT /types/{Id}
+PUT /api/type/{Id}
 ```
 
 
@@ -650,7 +264,7 @@ PUT /types/{Id}
 |Type|Name|Description|Schema|
 |---|---|---|---|
 |**Path**|**Id**  <br>*required*|Id|integer (int64)|
-|**Body**|**typeDetails**  <br>*required*|typeDetails|[Type](#type)|
+|**Body**|**typeEntityDetails**  <br>*required*|typeEntityDetails|[TypeEntity](#typeentity)|
 
 
 #### Responses
@@ -672,13 +286,13 @@ PUT /types/{Id}
 
 #### Tags
 
-* type-controller
+* type
 
 
 <a name="deletetypebyidusingdelete"></a>
-### deleteTypeById
+### Supprimer un type de pokémon par id
 ```
-DELETE /types/{Id}
+DELETE /api/type/{Id}
 ```
 
 
@@ -703,7 +317,7 @@ DELETE /types/{Id}
 
 #### Tags
 
-* type-controller
+* type
 
 
 
