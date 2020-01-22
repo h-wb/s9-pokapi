@@ -99,9 +99,9 @@
                 <version>1.3.3</version>
                 <configuration>
                     <swaggerInput>${project.build.directory}/generated-sources/swagger.json</swaggerInput>
-                    <outputDir>${project.basedir}/src/main/asciidoc</outputDir>
+                    <outputDir>${project.basedir}/docs/api</outputDir>
                     <config>
-                        <swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage>
+                        <swagger2markup.markupLanguage>MARKDOWN</swagger2markup.markupLanguage>
                     </config>
                 </configuration>
                 <executions>
@@ -109,38 +109,6 @@
                         <phase>prepare-package</phase>
                         <goals>
                             <goal>convertSwagger2markup</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.asciidoctor</groupId>
-                <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>1.5.3</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jruby</groupId>
-                        <artifactId>jruby-complete</artifactId>
-                        <version>1.7.21</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <sourceDirectory>${project.basedir}/src/main/asciidoc/</sourceDirectory>
-                    <sourceDocumentName>index.adoc</sourceDocumentName>
-                    <backend>html5</backend>
-                    <outputDirectory>${project.build.directory}/generated-sources/swagger-html/</outputDirectory>
-                    <attributes>
-                        <toc>left</toc>
-                        <toclevels>3</toclevels>
-                        <generated>${project.basedir}/src/main/asciidoc</generated>
-                    </attributes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>output-html</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>process-asciidoc</goal>
                         </goals>
                     </execution>
                 </executions>
