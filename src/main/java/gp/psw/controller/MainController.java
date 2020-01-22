@@ -1,6 +1,6 @@
 package gp.psw.controller;
 
-import gp.psw.dao.PokemonDAO;
+import gp.psw.repository.PokemonRepository;
 import gp.psw.entity.Pokemon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MainController {
 
     @Autowired
-    private PokemonDAO pokemonDAO;
+    private PokemonRepository pokemonRepository;
 
     @ResponseBody
     @RequestMapping("/")
     public String index() {
-        Iterable<Pokemon> all = pokemonDAO.findAll();
+        Iterable<Pokemon> all = pokemonRepository.findAll();
 
         StringBuilder sb = new StringBuilder();
 
