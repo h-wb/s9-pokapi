@@ -2,10 +2,15 @@ version: '3.5'
 services:
   groupe3:
     image: m2gi/groupe3:0.0.1-SNAPSHOT
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m -XX:+UseSerialGC -Xss512k
     networks:
       #network pour traefik
       - 'traefik-public'
     deploy:
+      placement:
+        constraints:
+          - node.labels.target == fac
       replicas: 1
       update_config:
         parallelism: 1
