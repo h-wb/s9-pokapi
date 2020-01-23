@@ -5,7 +5,7 @@ properties([buildDiscarder(logRotator(artifactNumToKeepStr: '5', numToKeepStr: '
 node {
 
     def commitId
-    def nomDeLimage = 'Pokapi'
+    def nomDeLimage = 'pokapi'
 
     stage('checkout') {
         git branch: 'develop', url: 'https://github.com/h-wb/Pokapi.git'
