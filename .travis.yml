@@ -1,15 +1,18 @@
-language: node_js
-node_js:
-  - lts/*
-install:
-  - npm install
-script:
-  - npm run build
-deploy:
-  provider: pages
-  skip_cleanup: true
-  local_dir: docs/.vuepress/dist
-  github_token: $TOKEN
-  keep_history: true
-  on:
-    branch: develop
+#language: node_js
+#node_js:
+#  - lts/*
+#install:
+#  - npm install
+#script:
+#  - npm run build
+#deploy:
+#  provider: pages
+#  skip_cleanup: true
+#  local_dir: docs/.vuepress/dist
+#  github_token: $TOKEN
+#  keep_history: true
+#  on:
+#    branch: develop
+language: java
+sudo: false
+script: mvn clean install
