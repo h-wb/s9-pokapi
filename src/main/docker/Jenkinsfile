@@ -8,7 +8,7 @@ node {
     def nomDeLimage = 'pokapi'
 
     stage('checkout') {
-        git branch: 'develop', url: 'https://github.com/h-wb/Pokapi.git'
+        git branch: ${BRANCH}, url: 'https://github.com/h-wb/Pokapi.git'
         commitId = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
     }
 
