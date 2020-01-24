@@ -8,11 +8,7 @@ node {
     def nomDeLimage = 'pokapi'
 
     stage('checkout') {
-        echo 'aaaa'
-        echo "$env"
-        echo "$BRANCH"
-        println ${env.BRANCH}
-        git branch: ${env.BRANCH}, url: 'https://github.com/h-wb/Pokapi.git'
+        git branch: "$BRANCH", url: "$GITHUB_URL"
         commitId = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
     }
 
