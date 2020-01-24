@@ -15,3 +15,5 @@
 #    branch: develop
 language: java
 script: mvn clean install
+before_install:
+  - chmod +x mvnw
