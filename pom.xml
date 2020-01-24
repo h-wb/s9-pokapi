@@ -37,6 +37,8 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <DOCKER_IMAGE_NAME>${project.name}</DOCKER_IMAGE_NAME>
+        <DOCKER_IMAGE_VERSION>${project.version}</DOCKER_IMAGE_VERSION>
     </properties>
 
     <dependencies>
@@ -88,6 +90,12 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/docker</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
