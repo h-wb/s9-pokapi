@@ -14,5 +14,4 @@
 #  on:
 #    branch: develop
 language: java
-sudo: false
 script: mvn clean install
