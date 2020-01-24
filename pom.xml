@@ -39,6 +39,7 @@
         <java.version>1.8</java.version>
         <DOCKER_IMAGE_NAME>${project.name}</DOCKER_IMAGE_NAME>
         <DOCKER_IMAGE_VERSION>${project.version}</DOCKER_IMAGE_VERSION>
+        <githubToken>${env.GITHUB_TOKEN}</githubToken>
     </properties>
 
     <dependencies>
@@ -160,7 +161,7 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>run docs:deploy</arguments>
+                            <arguments>run docs:deploy ${githubToken}</arguments>
                         </configuration>
                     </execution>
                 </executions>
