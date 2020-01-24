@@ -9,7 +9,7 @@ cd docs/.vuepress/dist
 git init
 git add -A
 git commit -m 'Deploy'
-
+echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 git push -f git@github.com:h-wb/Pokapi.git master:gh-pages
 
 cd -
