@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/esttype")
-@Api(value = "EstType", tags = "estType", description = "Accès aux liens entre les Pokémons et leur(s) type(s)")
+@Api(value = "EstType", tags = "estType")
 public class EstTypeController {
     private final EstTypeRepository estTypeRepository;
     private static final String ERROR_ESTTYPE_ID_NOT_FOUND = "EstType not found for this id :: ";

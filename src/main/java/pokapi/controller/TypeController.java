@@ -17,7 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/type")
-@Api(value = "Type", tags = "type", description = "Accès aux types de Pokémons")
+@Api(value = "Type", tags = "type")
 public class TypeController {
     private TypeRepository typeRepository;
     private static final String ERROR_TYPE_ID_NOT_FOUND = "Type not found for this id :: ";

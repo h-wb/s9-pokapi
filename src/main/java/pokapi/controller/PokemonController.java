@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/pokemon")
-@Api(value = "Pokémons", tags = "pokemon", description = "Accès aux Pokémons")
+@Api(value = "Pokémons", tags = "pokemon")
 public class PokemonController {
     private final PokemonRepository pokemonRepository;
     private static final String ERROR_POKEMON_ID_NOT_FOUND = "Pokemon not found for this id :: ";
