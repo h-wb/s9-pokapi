@@ -9,10 +9,12 @@ import pokapi.exception.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Id;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/pokemon")
@@ -30,6 +32,15 @@ public class PokemonController {
     @ResponseBody
     List<PokemonEntity> getAllPokemons() {
         return (List<PokemonEntity>) pokemonRepository.findAll();
+    }
+
+    @ApiOperation(value= "Récuperer les pokémons par id Pokédex")
+    @GetMapping("/pokedex/{IdPokedex}")
+    @ResponseBody
+    List<PokemonEntity> getAllPokemonsByPokedexId(@PathVariable final Long IdPokedex) {
+        return ((List<PokemonEntity>) pokemonRepository.findAll()).stream()
+                .filter(pokemonEntity -> pokemonEntity.getIdPokedex().equals(IdPokedex))
+                .collect(Collectors.toList());
     }
 
     @ApiOperation(value= "Créer un pokémon")
