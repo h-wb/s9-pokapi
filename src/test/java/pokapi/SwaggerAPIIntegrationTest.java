@@ -1,6 +1,7 @@
 package pokapi;
 
 import pokapi.configuration.SwaggerConfig;
+import pokapi.repository.EstTypeRepository;
 import pokapi.repository.PokemonRepository;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -32,6 +33,8 @@ public class SwaggerAPIIntegrationTest {
     private PokemonRepository pokemonRepository;
     @MockBean
     private TypeRepository typeRepository;
+    @MockBean
+    private EstTypeRepository estTypeRepository;
 
     @Test
     public void swaggerJsonExists() throws Exception {
