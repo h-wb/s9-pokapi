@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pokapi.dto.PokemonDTO;
 import pokapi.entity.PokemonEntity;
 import pokapi.exception.ResourceNotFoundException;
 import pokapi.repository.PokemonRepository;
@@ -29,14 +30,14 @@ public class PokemonController {
     @ApiOperation(value= "Récuperer tous les pokémons")
     @GetMapping("/all")
     @ResponseBody
-    List<PokemonEntity> getAllPokemons() {
+    public List<PokemonEntity> getAllPokemons() {
         return (List<PokemonEntity>) pokemonRepository.findAll();
     }
 
     @ApiOperation(value= "Récuperer les pokémons par id Pokédex")
     @GetMapping("/pokedex/{IdPokedex}")
     @ResponseBody
-    List<PokemonEntity> getAllPokemonsByPokedexId(@PathVariable final Long IdPokedex) {
+    public List<PokemonEntity> getAllPokemonsByPokedexId(@PathVariable final Long IdPokedex) {
         return ((List<PokemonEntity>) pokemonRepository.findAll()).stream()
                 .filter(pokemonEntity -> pokemonEntity.getIdPokedex().equals(IdPokedex))
                 .collect(Collectors.toList());
@@ -45,14 +46,14 @@ public class PokemonController {
     @ApiOperation(value= "Créer un pokémon")
     @PostMapping("/new")
     @ResponseBody
-    public PokemonEntity createPokemon(@Valid @RequestBody PokemonEntity pokemonEntity) {
-        return pokemonRepository.save(pokemonEntity);
+    public PokemonEntity createPokemon(@Valid @RequestBody PokemonDTO pokemonDTO) {
+        return pokemonRepository.save(new PokemonEntity(pokemonDTO));
     }
 
     @ApiOperation(value= "Récupérer un pokémon par id")
     @GetMapping("/{Id}")
     @ResponseBody
-    ResponseEntity<PokemonEntity> getPokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
+    public ResponseEntity<PokemonEntity> getPokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
         PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
         return ResponseEntity.ok().body(pokemonEntity);
@@ -61,7 +62,7 @@ public class PokemonController {
     @ApiOperation(value= "Supprimer un pokémon par id")
     @DeleteMapping("/{Id}")
     @ResponseBody
-    Map<String, Boolean> deletePokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
+    public Map<String, Boolean> deletePokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
         PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
 
@@ -74,12 +75,12 @@ public class PokemonController {
     @ApiOperation(value= "Modifier un pokémon par id")
     @PutMapping("/{Id}")
     @ResponseBody
-    public ResponseEntity<Object> updatePokemon(@PathVariable final long Id, @Valid @RequestBody PokemonEntity pokemonEntityDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Object> updatePokemon(@PathVariable final long Id, @Valid @RequestBody PokemonDTO pokemonDTO) throws ResourceNotFoundException {
         PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
 
-        pokemonEntity.setName(pokemonEntityDetails.getName());
-        pokemonEntity.setIdPokedex(pokemonEntityDetails.getIdPokedex());
+        pokemonEntity.setName(pokemonDTO.getName());
+        pokemonEntity.setIdPokedex(pokemonDTO.getIdPokedex());
         final PokemonEntity updatedPokemonEntity = pokemonRepository.save(pokemonEntity);
         return ResponseEntity.ok(updatedPokemonEntity);
     }

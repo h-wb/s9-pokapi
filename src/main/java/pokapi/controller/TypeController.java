@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pokapi.dto.TypeDTO;
 import pokapi.entity.TypeEntity;
 import pokapi.exception.ResourceNotFoundException;
 import pokapi.repository.TypeRepository;
@@ -35,8 +36,8 @@ public class TypeController {
     @ApiOperation(value= "Créer un type de pokémon")
     @PostMapping("/new")
     @ResponseBody
-    public TypeEntity createType(@Valid @RequestBody TypeEntity typeEntity) {
-        return typeRepository.save(typeEntity);
+    public TypeEntity createType(@Valid @RequestBody TypeDTO typeDTO) {
+        return typeRepository.save(new TypeEntity(typeDTO));
     }
 
     @ApiOperation(value= "Récupérer un type de pokémon par id")
@@ -64,11 +65,11 @@ public class TypeController {
     @ApiOperation(value= "Modifier un type de pokémon par id")
     @PutMapping("/{Id}")
     @ResponseBody
-    public ResponseEntity<Object> updateType(@PathVariable final long Id, @Valid @RequestBody TypeEntity typeEntityDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Object> updateType(@PathVariable final long Id, @Valid @RequestBody TypeDTO typeDTO) throws ResourceNotFoundException {
         TypeEntity typeEntity = typeRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException("Type not found for this id :: " + Id));
 
-        typeEntity.setName(typeEntityDetails.getName());
+        typeEntity.setName(typeDTO.getName());
         final TypeEntity updatedTypeEntity = typeRepository.save(typeEntity);
         return ResponseEntity.ok(updatedTypeEntity);
     }
