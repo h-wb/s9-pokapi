@@ -14,7 +14,7 @@
 #  on:
 #    branch: develop
 language: java
-script: mvn clean verify sonar:sonar -Pdev -Pdeploy -Pcoverage
+script: mvn clean verify sonar:sonar -Pdev -Pdeploy -Pcoverage -Dsonar.projectKey=h-wb_Pokapi
 install: true
 addons:
   sonarcloud:
