@@ -14,7 +14,7 @@
 #  on:
 #    branch: develop
 language: java
-script: mvn clean verify -Pdev -Pdeploy -Pcoverage
+script: mvn clean verify sonar:sonar -Pdev -Pdeploy -Pcoverage
 install: true
 addons:
   sonarcloud:
