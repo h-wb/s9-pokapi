@@ -20,6 +20,7 @@ import java.util.Map;
 @Api(value = "Type", tags = "type", description = "Accès aux types de Pokémons")
 public class TypeController {
     private TypeRepository typeRepository;
+    private static final String ERROR_TYPE_ID_NOT_FOUND = "Type not found for this id :: ";
 
     @Autowired
     public TypeController(TypeRepository typeRepository){
@@ -45,7 +46,7 @@ public class TypeController {
     @ResponseBody
     public ResponseEntity<TypeEntity> getTypeById(@PathVariable final Long Id) throws ResourceNotFoundException {
         TypeEntity typeEntity = typeRepository.findById(Id)
-                .orElseThrow(() -> new ResourceNotFoundException("Type not found for this id :: " + Id));
+                .orElseThrow(() -> new ResourceNotFoundException(ERROR_TYPE_ID_NOT_FOUND + Id));
         return ResponseEntity.ok().body(typeEntity);
     }
 
@@ -54,7 +55,7 @@ public class TypeController {
     @ResponseBody
     public Map<String, Boolean> deleteTypeById(@PathVariable final Long Id) throws ResourceNotFoundException {
         TypeEntity typeEntity = typeRepository.findById(Id)
-                .orElseThrow(() -> new ResourceNotFoundException("Type not found for this id :: " + Id));
+                .orElseThrow(() -> new ResourceNotFoundException(ERROR_TYPE_ID_NOT_FOUND + Id));
 
         typeRepository.delete(typeEntity);
         Map<String, Boolean> response = new HashMap<>();
@@ -67,7 +68,7 @@ public class TypeController {
     @ResponseBody
     public ResponseEntity<Object> updateType(@PathVariable final long Id, @Valid @RequestBody TypeDTO typeDTO) throws ResourceNotFoundException {
         TypeEntity typeEntity = typeRepository.findById(Id)
-                .orElseThrow(() -> new ResourceNotFoundException("Type not found for this id :: " + Id));
+                .orElseThrow(() -> new ResourceNotFoundException(ERROR_TYPE_ID_NOT_FOUND + Id));
 
         typeEntity.setName(typeDTO.getName());
         final TypeEntity updatedTypeEntity = typeRepository.save(typeEntity);
