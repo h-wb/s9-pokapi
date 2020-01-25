@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/pokemon")
-@Api(value = "Pokémons", tags = "pokemon")
+@Api(value = "Pokémons", tags = "pokemon", description = "Accès aux Pokémons")
 public class PokemonController {
     private final PokemonRepository pokemonRepository;
 
