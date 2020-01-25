@@ -29,14 +29,14 @@ public class EstTypeController {
     @ApiOperation(value = "Récupérer tous les liens entre les Pokémons et les types")
     @GetMapping("/all")
     @ResponseBody
-    List<EstTypeEntity> getAllLiensEstType() {
+    public List<EstTypeEntity> getAllLiensEstType() {
         return (List<EstTypeEntity>) estTypeRepository.findAll();
     }
 
     @ApiOperation(value = "Récupérer tous les liens entre un Pokémon et ses types par l'id du Pokémon")
     @GetMapping("/all/pokemon/{Id}")
     @ResponseBody
-    List<EstTypeEntity> getAllLiensEstTypeByPokemon(@PathVariable final Long Id) {
+    public List<EstTypeEntity> getAllLiensEstTypeByPokemon(@PathVariable final Long Id) {
         List<EstTypeEntity> estTypeEntities = getAllLiensEstType();
 
         return estTypeEntities.stream()
@@ -47,7 +47,7 @@ public class EstTypeController {
     @ApiOperation(value = "Récupérer tous les liens entre les Pokémons et un type par l'id du type")
     @GetMapping("/all/type/{Id}")
     @ResponseBody
-    List<EstTypeEntity> getAllLiensEstTypeByType(@PathVariable final Long Id) {
+    public List<EstTypeEntity> getAllLiensEstTypeByType(@PathVariable final Long Id) {
         List<EstTypeEntity> estTypeEntities = getAllLiensEstType();
 
         return estTypeEntities.stream()
@@ -65,7 +65,7 @@ public class EstTypeController {
     @ApiOperation(value = "Récupérer un lien entre un Pokémon et un type par id")
     @GetMapping("/{Id}")
     @ResponseBody
-    ResponseEntity<EstTypeEntity> getLienEstTypeById(@PathVariable final Long Id) throws ResourceNotFoundException {
+    public ResponseEntity<EstTypeEntity> getLienEstTypeById(@PathVariable final Long Id) throws ResourceNotFoundException {
         EstTypeEntity estTypeEntity = estTypeRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException("EstType not found for this id :: " + Id));
         return ResponseEntity.ok().body(estTypeEntity);
@@ -74,7 +74,7 @@ public class EstTypeController {
     @ApiOperation(value = "Supprimer un lien entre un Pokémon et un type par id")
     @DeleteMapping("/{Id}")
     @ResponseBody
-    Map<String, Boolean> deleteLienEstType(@PathVariable final Long Id) throws ResourceNotFoundException {
+    public Map<String, Boolean> deleteLienEstType(@PathVariable final Long Id) throws ResourceNotFoundException {
         EstTypeEntity estTypeEntity = estTypeRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException("EstType not found for this id :: " + Id));
 
