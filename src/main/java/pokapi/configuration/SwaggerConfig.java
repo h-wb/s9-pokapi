@@ -31,7 +31,6 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("Pokapi")
                 .description("API Pokemon créée dans le cadre du M2 GI")
-                .version("0.0.1")
                 .build();
     }
 

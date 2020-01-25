@@ -14,8 +14,13 @@
 #  on:
 #    branch: develop
 language: java
-script: mvn clean install -Pdev -Pdeploy
+script: mvn clean verify -Pdev -Pdeploy -Pcoverage
 install: true
+addons:
+  sonarcloud:
+    organization: "sonarcloud"
+    token:
+      secure: "i187XBktTGGFa7YzZ0N/SicrDNViDreX7FMIAx5qIWU0UXZSE2QOTks0G7cMiK2LhewUPSXrgpYMPdYPXDTPnjvcIp5G5t2UyihfzQZGm3+opNE0Bkjp5dF73KVNrPPMZLjJ7S6BHF1FZWJVK37rXF5olyB3mxAvv6JdC1y6lFFky66r7vQGpdn/VjHrUClraYx4BMWS8q5TJZdGAlDI7JVwyBr68wfnFZaTSnlc27REVxpFiZ9oO/PeEK1l1Thxgb+UPwhMDfWRV75UisaakBUUAqUO73zA6n8cwdLNrnessng1T8roFgkN/K3h+cyFI9Dr5bpX4YSCOR4L1pOLsQ7LUQK13+15xbDcUVsQywjXn0oN+WcyZr9vS6O6uBstzFt30EAbnw1ifugxzbqRInap8dOSK0fShQmys9s019rJMlYtG3zAXH28XNBmM3Be1WqepB+hK43NBk60h7Zq6i0+0tW7UCeaHkzcm43crDG5Q/WYxAxPMbSCovBdjWrMvnEIez+CjpA9QDSnGgq59gw8HBCQNqjYEayKknmco7HGXSKWbKVFpZUzofNU6dPxydN7zGTtNo6b7oy7czbyXXpk4NJzdupYNxcDJ+zg5TvXMEp5p/N5ossz2N+m2AAn/KiZPSsGka6WXWEL1eCy+6hfcAM0FYVXJPRZTwPCdos="
 before_install:
   - chmod +x mvnw
   - chmod +x docs/deploy.sh
