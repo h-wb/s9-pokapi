@@ -99,7 +99,7 @@ POST /api/esttype/new
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Body**|**estTypeEntity**  <br>*required*|estTypeEntity|[EstTypeEntity](#esttypeentity)|
+|**Body**|**estTypeDTO**  <br>*required*|estTypeDTO|[EstTypeDTO](#esttypedto)|
 
 
 #### Responses
@@ -167,7 +167,7 @@ PUT /api/esttype/{Id}
 |Type|Name|Description|Schema|
 |---|---|---|---|
 |**Path**|**Id**  <br>*required*|Id|integer (int64)|
-|**Body**|**estTypeEntityDetails**  <br>*required*|estTypeEntityDetails|[EstTypeEntity](#esttypeentity)|
+|**Body**|**estTypeDTO**  <br>*required*|estTypeDTO|[EstTypeDTO](#esttypedto)|
 
 
 #### Responses
@@ -258,7 +258,7 @@ POST /api/pokemon/new
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Body**|**pokemonEntity**  <br>*required*|pokemonEntity|[PokemonEntity](#pokemonentity)|
+|**Body**|**pokemonDTO**  <br>*required*|pokemonDTO|[PokemonDTO](#pokemondto)|
 
 
 #### Responses
@@ -357,7 +357,7 @@ PUT /api/pokemon/{Id}
 |Type|Name|Description|Schema|
 |---|---|---|---|
 |**Path**|**Id**  <br>*required*|Id|integer (int64)|
-|**Body**|**pokemonEntityDetails**  <br>*required*|pokemonEntityDetails|[PokemonEntity](#pokemonentity)|
+|**Body**|**pokemonDTO**  <br>*required*|pokemonDTO|[PokemonDTO](#pokemondto)|
 
 
 #### Responses
@@ -448,7 +448,7 @@ POST /api/type/new
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Body**|**typeEntity**  <br>*required*|typeEntity|[TypeEntity](#typeentity)|
+|**Body**|**typeDTO**  <br>*required*|typeDTO|[TypeDTO](#typedto)|
 
 
 #### Responses
@@ -516,7 +516,7 @@ PUT /api/type/{Id}
 |Type|Name|Description|Schema|
 |---|---|---|---|
 |**Path**|**Id**  <br>*required*|Id|integer (int64)|
-|**Body**|**typeEntityDetails**  <br>*required*|typeEntityDetails|[TypeEntity](#typeentity)|
+|**Body**|**typeDTO**  <br>*required*|typeDTO|[TypeDTO](#typedto)|
 
 
 #### Responses

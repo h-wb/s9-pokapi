@@ -13,9 +13,9 @@ API Pokemon créée dans le cadre du M2 GI
 
 ### Tags
 
-* estType : Est Type Controller
-* pokemon : Pokemon Controller
-* type : Type Controller
+* estType : Accès aux liens entre les Pokémons et leur(s) type(s)
+* pokemon : Accès aux Pokémons
+* type : Accès aux types de Pokémons
 
 
 
