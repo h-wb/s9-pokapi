@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pokapi.dto.EstTypeDTO;
 import pokapi.entity.EstTypeEntity;
 import pokapi.exception.ResourceNotFoundException;
 import pokapi.repository.EstTypeRepository;
@@ -58,8 +59,8 @@ public class EstTypeController {
     @ApiOperation(value = "Créer un lien entre un Pokémon et un type")
     @PostMapping("/new")
     @ResponseBody
-    public EstTypeEntity createLienEstType(@Valid @RequestBody EstTypeEntity estTypeEntity) {
-        return estTypeRepository.save(estTypeEntity);
+    public EstTypeEntity createLienEstType(@Valid @RequestBody EstTypeDTO estTypeDTO) {
+        return estTypeRepository.save(new EstTypeEntity(estTypeDTO));
     }
 
     @ApiOperation(value = "Récupérer un lien entre un Pokémon et un type par id")
@@ -87,12 +88,12 @@ public class EstTypeController {
     @ApiOperation(value = "Modifier un lien entre un Pokémon et un type par id")
     @PutMapping("/{Id}")
     @ResponseBody
-    public ResponseEntity<Object> updateLienEstType(@PathVariable final Long Id, @Valid @RequestBody EstTypeEntity estTypeEntityDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Object> updateLienEstType(@PathVariable final Long Id, @Valid @RequestBody EstTypeDTO estTypeDTO) throws ResourceNotFoundException {
         EstTypeEntity estTypeEntity = estTypeRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException("EstType not found for this id :: " + Id));
 
-        estTypeEntity.setIdPokemon(estTypeEntityDetails.getIdPokemon());
-        estTypeEntity.setIdType(estTypeEntityDetails.getIdType());
+        estTypeEntity.setIdPokemon(estTypeDTO.getIdPokemon());
+        estTypeEntity.setIdType(estTypeDTO.getIdType());
         final EstTypeEntity updatedEstTypeEntity = estTypeRepository.save(estTypeEntity);
         return ResponseEntity.ok(updatedEstTypeEntity);
     }
