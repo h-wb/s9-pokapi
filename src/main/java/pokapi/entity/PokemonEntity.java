@@ -2,7 +2,8 @@ package pokapi.entity;
 
 import pokapi.model.Pokemon;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "POKEMON")

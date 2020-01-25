@@ -2,7 +2,8 @@ package pokapi.entity;
 
 import pokapi.model.Type;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "TYPE")

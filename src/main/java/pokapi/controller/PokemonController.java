@@ -3,13 +3,12 @@ package pokapi.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import pokapi.entity.PokemonEntity;
-import pokapi.repository.PokemonRepository;
-import pokapi.exception.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pokapi.entity.PokemonEntity;
+import pokapi.exception.ResourceNotFoundException;
+import pokapi.repository.PokemonRepository;
 
-import javax.persistence.Id;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
