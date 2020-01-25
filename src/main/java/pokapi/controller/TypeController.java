@@ -16,7 +16,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/type")
-@Api(value = "Type", tags = "type")
+@Api(value = "Type", tags = "type", description = "Accès aux types de Pokémons")
 public class TypeController {
     private TypeRepository typeRepository;
 

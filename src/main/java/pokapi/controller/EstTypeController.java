@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/esttype")
-@Api(value = "EstType", tags = "estType")
+@Api(value = "EstType", tags = "estType", description = "Accès aux liens entre les Pokémons et leur(s) type(s)")
 public class EstTypeController {
     private final EstTypeRepository estTypeRepository;
 
