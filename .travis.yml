@@ -15,6 +15,7 @@
 #    branch: develop
 language: java
 script: mvn clean install -Pdev -Pdeploy
+install: true
 before_install:
   - chmod +x mvnw
   - chmod +x docs/deploy.sh
