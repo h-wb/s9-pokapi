@@ -17,6 +17,7 @@ API Pokemon créée dans le cadre du M2 GI
 
 ### Tags
 
+* estType : Est Type Controller
 * pokemon : Pokemon Controller
 * type : Type Controller
 

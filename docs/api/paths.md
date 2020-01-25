@@ -2,6 +2,227 @@
 <a name="paths"></a>
 ## Paths
 
+<a name="getallliensesttypeusingget"></a>
+### Récupérer tous les liens entre les Pokémons et les types
+```
+GET /api/esttype/all
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [EstTypeEntity](#esttypeentity) > array|
+
+
+#### Produces
+
+* `*/*`
+
+
+#### Tags
+
+* estType
+
+
+<a name="getallliensesttypebypokemonusingget"></a>
+### Récupérer tous les liens entre un Pokémon et ses types par l'id du Pokémon
+```
+GET /api/esttype/all/pokemon/{Id}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**Id**  <br>*required*|Id|integer (int64)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [EstTypeEntity](#esttypeentity) > array|
+
+
+#### Produces
+
+* `*/*`
+
+
+#### Tags
+
+* estType
+
+
+<a name="getallliensesttypebytypeusingget"></a>
+### Récupérer tous les liens entre les Pokémons et un type par l'id du type
+```
+GET /api/esttype/all/type/{Id}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**Id**  <br>*required*|Id|integer (int64)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [EstTypeEntity](#esttypeentity) > array|
+
+
+#### Produces
+
+* `*/*`
+
+
+#### Tags
+
+* estType
+
+
+<a name="createlienesttypeusingpost"></a>
+### Créer un lien entre un Pokémon et un type
+```
+POST /api/esttype/new
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Body**|**estTypeEntity**  <br>*required*|estTypeEntity|[EstTypeEntity](#esttypeentity)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[EstTypeEntity](#esttypeentity)|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `*/*`
+
+
+#### Tags
+
+* estType
+
+
+<a name="getlienesttypebyidusingget"></a>
+### Récupérer un lien entre un Pokémon et un type par id
+```
+GET /api/esttype/{Id}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**Id**  <br>*required*|Id|integer (int64)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[EstTypeEntity](#esttypeentity)|
+
+
+#### Produces
+
+* `*/*`
+
+
+#### Tags
+
+* estType
+
+
+<a name="updatelienesttypeusingput"></a>
+### Modifier un lien entre un Pokémon et un type par id
+```
+PUT /api/esttype/{Id}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**Id**  <br>*required*|Id|integer (int64)|
+|**Body**|**estTypeEntityDetails**  <br>*required*|estTypeEntityDetails|[EstTypeEntity](#esttypeentity)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|object|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `*/*`
+
+
+#### Tags
+
+* estType
+
+
+<a name="deletelienesttypeusingdelete"></a>
+### Supprimer un lien entre un Pokémon et un type par id
+```
+DELETE /api/esttype/{Id}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**Id**  <br>*required*|Id|integer (int64)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< string, boolean > map|
+
+
+#### Produces
+
+* `*/*`
+
+
+#### Tags
+
+* estType
+
+
 <a name="getallpokemonsusingget"></a>
 ### Récuperer tous les pokémons
 ```
@@ -50,6 +271,37 @@ POST /api/pokemon/new
 #### Consumes
 
 * `application/json`
+
+
+#### Produces
+
+* `*/*`
+
+
+#### Tags
+
+* pokemon
+
+
+<a name="getallpokemonsbypokedexidusingget"></a>
+### Récuperer les pokémons par id Pokédex
+```
+GET /api/pokemon/pokedex/{IdPokedex}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**IdPokedex**  <br>*required*|IdPokedex|integer (int64)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [PokemonEntity](#pokemonentity) > array|
 
 
 #### Produces

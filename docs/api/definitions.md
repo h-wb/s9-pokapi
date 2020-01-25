@@ -2,6 +2,17 @@
 <a name="definitions"></a>
 ## Definitions
 
+<a name="esttypeentity"></a>
+### EstTypeEntity
+Classe représentant le lien entre un Pokémon et un type
+
+
+|Name|Description|Schema|
+|---|---|---|
+|**idPokemon**  <br>*optional*|Identifiant du Pokémon  <br>**Example** : `1`|integer (int64)|
+|**idType**  <br>*optional*|Identifiant du type  <br>**Example** : `1`|integer (int64)|
+
+
 <a name="pokemonentity"></a>
 ### PokemonEntity
 Classe représentant un Pokémon
