@@ -18,9 +18,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/esttype")
-@Api(value = "EstType", tags = "estType", description = "Accès aux liens entre les Pokémons et leur(s) type(s)")
+@Api(value = "EstType", tags = "estType")
 public class EstTypeController {
     private final EstTypeRepository estTypeRepository;
+    private static final String ERROR_ESTTYPE_ID_NOT_FOUND = "EstType not found for this id :: ";
 
     @Autowired
     public EstTypeController(EstTypeRepository estTypeRepository) {
@@ -68,7 +69,7 @@ public class EstTypeController {
     @ResponseBody
     public ResponseEntity<EstTypeEntity> getLienEstTypeById(@PathVariable final Long Id) throws ResourceNotFoundException {
         EstTypeEntity estTypeEntity = estTypeRepository.findById(Id)
-                .orElseThrow(() -> new ResourceNotFoundException("EstType not found for this id :: " + Id));
+                .orElseThrow(() -> new ResourceNotFoundException(ERROR_ESTTYPE_ID_NOT_FOUND + Id));
         return ResponseEntity.ok().body(estTypeEntity);
     }
 
@@ -77,7 +78,7 @@ public class EstTypeController {
     @ResponseBody
     public Map<String, Boolean> deleteLienEstType(@PathVariable final Long Id) throws ResourceNotFoundException {
         EstTypeEntity estTypeEntity = estTypeRepository.findById(Id)
-                .orElseThrow(() -> new ResourceNotFoundException("EstType not found for this id :: " + Id));
+                .orElseThrow(() -> new ResourceNotFoundException(ERROR_ESTTYPE_ID_NOT_FOUND + Id));
 
         estTypeRepository.delete(estTypeEntity);
         Map<String, Boolean> response = new HashMap<>();
@@ -90,7 +91,7 @@ public class EstTypeController {
     @ResponseBody
     public ResponseEntity<Object> updateLienEstType(@PathVariable final Long Id, @Valid @RequestBody EstTypeDTO estTypeDTO) throws ResourceNotFoundException {
         EstTypeEntity estTypeEntity = estTypeRepository.findById(Id)
-                .orElseThrow(() -> new ResourceNotFoundException("EstType not found for this id :: " + Id));
+                .orElseThrow(() -> new ResourceNotFoundException(ERROR_ESTTYPE_ID_NOT_FOUND + Id));
 
         estTypeEntity.setIdPokemon(estTypeDTO.getIdPokemon());
         estTypeEntity.setIdType(estTypeDTO.getIdType());

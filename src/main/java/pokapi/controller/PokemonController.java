@@ -18,9 +18,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/pokemon")
-@Api(value = "Pokémons", tags = "pokemon", description = "Accès aux Pokémons")
+@Api(value = "Pokémons", tags = "pokemon")
 public class PokemonController {
     private final PokemonRepository pokemonRepository;
+    private static final String ERROR_POKEMON_ID_NOT_FOUND = "Pokemon not found for this id :: ";
 
     @Autowired
     public PokemonController(PokemonRepository pokemonRepository){
@@ -55,7 +56,7 @@ public class PokemonController {
     @ResponseBody
     public ResponseEntity<PokemonEntity> getPokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
         PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
-                .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
+                .orElseThrow(() -> new ResourceNotFoundException(ERROR_POKEMON_ID_NOT_FOUND + Id));
         return ResponseEntity.ok().body(pokemonEntity);
     }
 
@@ -64,7 +65,7 @@ public class PokemonController {
     @ResponseBody
     public Map<String, Boolean> deletePokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
         PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
-                .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
+                .orElseThrow(() -> new ResourceNotFoundException(ERROR_POKEMON_ID_NOT_FOUND + Id));
 
         pokemonRepository.delete(pokemonEntity);
         Map<String, Boolean> response = new HashMap<>();
@@ -77,7 +78,7 @@ public class PokemonController {
     @ResponseBody
     public ResponseEntity<Object> updatePokemon(@PathVariable final long Id, @Valid @RequestBody PokemonDTO pokemonDTO) throws ResourceNotFoundException {
         PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
-                .orElseThrow(() -> new ResourceNotFoundException("Pokemon not found for this id :: " + Id));
+                .orElseThrow(() -> new ResourceNotFoundException(ERROR_POKEMON_ID_NOT_FOUND + Id));
 
         pokemonEntity.setName(pokemonDTO.getName());
         pokemonEntity.setIdPokedex(pokemonDTO.getIdPokedex());
