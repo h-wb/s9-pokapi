@@ -67,6 +67,36 @@ services:
     depends_on:
       - traefik
 
+  grafana:
+    image: grafana/grafana:latest
+    links:
+      - groupe3
+    ports:
+      - 9092:3000
+    networks:
+      - 'traefik-public'
+    deploy:
+      placement:
+        constraints:
+          - node.labels.target == fac
+      replicas: 1
+      update_config:
+        parallelism: 1
+        order: start-first
+      restart_policy:
+        max_attempts: 5
+      labels:
+        - traefik.frontend.rule=Host:groupe3.m2gi.win;PathPrefixStrip:/grafana/
+        - traefik.enable=true
+        - traefik.port=3000
+        - traefik.tags=traefik-public
+        - traefik.docker.network=traefik-public
+        - traefik.redirectorservice.frontend.entryPoints=http
+        - traefik.redirectorservice.frontend.redirect.entryPoint=https
+        - traefik.webservice.frontend.entryPoints=https
+    depends_on:
+      - traefik
+
 configs:
   prometheus_conf7:
     file: /var/jenkins_home/workspace/g3-psw/src/main/docker/prometheus.yml
