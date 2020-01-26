@@ -31,7 +31,7 @@ services:
   prometheus:
     image: prom/prometheus:latest
     volumes:
-      - /src/main/docker/containers:/etc/prometheus/
+      - /src/main/docker:/etc/prometheus/
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     networks:
