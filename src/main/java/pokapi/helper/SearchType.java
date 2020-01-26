@@ -26,9 +26,7 @@ public class SearchType {
         }
 
         List<Map.Entry<TypeEntity, Integer>> typesScored = new ArrayList<>();
-        allTypes.forEach(typeEntity -> {
-            Search.searchScoreEntity(typesScored, typeEntity, typeEntity.getName(), exp);
-        });
+        allTypes.forEach(typeEntity -> Search.searchScoreEntity(typesScored, typeEntity, typeEntity.getName(), exp));
 
         typesScored.sort(Collections.reverseOrder(Map.Entry.comparingByValue()));
 

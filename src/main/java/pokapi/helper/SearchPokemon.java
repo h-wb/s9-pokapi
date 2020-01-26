@@ -26,9 +26,7 @@ public class SearchPokemon {
         }
 
         List<Map.Entry<PokemonEntity, Integer>> pokemonsScored = new ArrayList<>();
-        allPokemons.forEach(pokemonEntity -> {
-            Search.searchScoreEntity(pokemonsScored, pokemonEntity, pokemonEntity.getName(), exp);
-        });
+        allPokemons.forEach(pokemonEntity -> Search.searchScoreEntity(pokemonsScored, pokemonEntity, pokemonEntity.getName(), exp));
 
         pokemonsScored.sort(Collections.reverseOrder(Map.Entry.comparingByValue()));
 

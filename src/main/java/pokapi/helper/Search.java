@@ -1,7 +1,6 @@
 package pokapi.helper;
 
 import org.apache.commons.lang3.StringUtils;
-import pokapi.entity.TypeEntity;
 
 import java.text.Normalizer;
 import java.util.AbstractMap;
@@ -11,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class Search {
 
-    private static final Integer notFound = -10;
+    private static final Integer NOT_FOUND = -10;
 
     private Search() {
     }
@@ -27,7 +26,7 @@ public class Search {
      */
     static <T> void searchScoreEntity(List<Map.Entry<T, Integer>> entitiesScored, T entity, String name, String exp) {
         int score = getScore(name, exp);
-        if (score != notFound) {
+        if (score != NOT_FOUND) {
             entitiesScored.add(new AbstractMap.SimpleImmutableEntry<>(entity, score));
         }
     }
@@ -40,7 +39,7 @@ public class Search {
      * @return score de la recherche
      */
     private static int getScore(String entityName, String exp) {
-        int maxScore = notFound;
+        int maxScore = NOT_FOUND;
 
         if (StringUtils.isBlank(entityName) || StringUtils.isBlank(exp)) {
             return maxScore;
@@ -64,14 +63,14 @@ public class Search {
      */
     private static int getScoreString(String entityName, String exp, int score) {
         if ((StringUtils.isBlank(entityName) || StringUtils.isBlank(exp)) && score == 0) {
-            return notFound;
+            return NOT_FOUND;
         }
 
         if (exp.length() == 0) {
             return score;
         } else {
             int result = getScoreLetter(entityName.charAt(0), exp.charAt(0));
-            if (result == notFound) {
+            if (result == NOT_FOUND) {
                 return result;
             } else {
                 return getScoreString(
@@ -102,10 +101,10 @@ public class Search {
 
             if (deAccentExpLetter.equals(deAccentEntityNameLetter)) {
                 return 2;
-            } else if (deAccentExpLetter.toLowerCase().equals(deAccentEntityNameLetter.toLowerCase())) {
+            } else if (deAccentExpLetter.equalsIgnoreCase(deAccentEntityNameLetter)) {
                 return 1;
             } else {
-                return notFound;
+                return NOT_FOUND;
             }
         }
     }
