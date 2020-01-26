@@ -15,42 +15,42 @@ node {
     // si jenkins est dans un docker, il faut rajouter -u root
     docker.image('openjdk:8').inside('-u root -e MAVEN_OPTS="-Duser.home=./"') {
 
-       stage('check tools') {
-            parallel(
-                    java: {
-                        sh "java -version"
-                    },
-                    maven: {
-                        sh "chmod +x mvnw"
-                        sh "./mvnw -version"
-                    }
-            )
-        }
-
-      stage('clean') {
-            sh "./mvnw clean"
-        }
-
-        stage('backend tests') {
-            try {
-                sh "./mvnw test"
-            } catch (err) {
-                throw err
-            } finally {
-                junit '**/target/surefire-reports/TEST-*.xml'
-            }
-        }
-
-        stage('packaging') {
-            sh "./mvnw verify -DskipTests"
-            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-        }
-
-        stage('Analyse SonarQube') {
-            withSonarQubeEnv('sonarqube') {
-                sh "./mvnw sonar:sonar"
-            }
-        }
+//       stage('check tools') {
+//            parallel(
+//                    java: {
+//                        sh "java -version"
+//                    },
+//                    maven: {
+//                        sh "chmod +x mvnw"
+//                        sh "./mvnw -version"
+//                    }
+//            )
+//        }
+//
+//      stage('clean') {
+//            sh "./mvnw clean"
+//        }
+//
+//        stage('backend tests') {
+//            try {
+//                sh "./mvnw test"
+//            } catch (err) {
+//                throw err
+//            } finally {
+//                junit '**/target/surefire-reports/TEST-*.xml'
+//            }
+//        }
+//
+//        stage('packaging') {
+//            sh "./mvnw verify -DskipTests"
+//            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+//        }
+//
+//        stage('Analyse SonarQube') {
+//            withSonarQubeEnv('sonarqube') {
+//                sh "./mvnw sonar:sonar"
+//            }
+//        }
 
         stage('preparing docker') {
             sh "cp -R src/main/docker/* target/"
@@ -72,20 +72,8 @@ node {
         // remplacement de la version par le numéro de commit
         sh "sed -i -E 's=m2gi/${nomDeLimage}:latest?=m2gi/${nomDeLimage}:${commitId}=g' src/main/docker/app.yml"
         sh "docker stack deploy -c src/main/docker/app.yml ${nomDeLimage}"
-        sh "docker run -d --name=groupe3_prometheus -v /src/main/resources:/etc/prometheus/ prom/prometheus --config.file=/etc/prometheus/prometheus.yml" +
-                "-l traefik.frontend.rule=Host:prom-g3.m2gi.win" +
-                "-l traefik.enable=true" +
-                "-l traefik.port=9090" +
-                "-l traefik.tags=traefik-public" +
-                "-l traefik.docker.network=traefik-public" +
-                "-l traefik.redirectorservice.frontend.entryPoints=http" +
-                "-l traefik.redirectorservice.frontend.redirect.entryPoint=https" +
-                "-l traefik.webservice.frontend.entryPoints=https"
-        sh "docker ps"
         sh "docker service ls"
-        sh "docker stop pokapi_groupe3.1.982k3qdwi90qof84ry0a65csh"
-        sh "docker rm pokapi_groupe3.1.982k3qdwi90qof84ry0a65csh"
-        sh "docker ps"
+        sh "docker service ps groupe3_prometheus"
 
     }
 }
