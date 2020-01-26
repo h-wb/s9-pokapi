@@ -31,7 +31,7 @@ services:
   prometheus:
     image: prom/prometheus:latest
     configs:
-      - source: prometheus_conf2
+      - source: prometheus_conf3
         target: /etc/prometheus/prometheus.yml
 #    volumes:
 #      - "/var/jenkins_home/workspace/g3-psw/src/main/docker:/etc/prometheus/"
@@ -62,7 +62,7 @@ services:
       - traefik
 
 configs:
-  prometheus_conf2:
+  prometheus_conf3:
     file: /var/jenkins_home/workspace/g3-psw/src/main/docker/prometheus.yml
 networks:
   traefik-public:

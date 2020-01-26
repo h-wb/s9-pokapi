@@ -23,4 +23,4 @@ scrape_configs:
     metrics_path: '/app/actuator/prometheus'
     scrape_interval: 5s
     static_configs:
-      - targets: ['HOST_IP:8080', 'https://groupe3.m2gi.win']
+      - targets: ['HOST_IP:8080', 'groupe3.m2gi.win']
