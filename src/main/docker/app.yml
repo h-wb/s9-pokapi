@@ -5,7 +5,6 @@ services:
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m -XX:+UseSerialGC -Xss512k
     networks:
-      #network pour traefik
       - 'traefik-public'
     deploy:
       placement:
@@ -23,14 +22,47 @@ services:
         - traefik.port=8080
         - traefik.tags=traefik-public
         - traefik.docker.network=traefik-public
-        # Traefik service that listens to HTTP
         - traefik.redirectorservice.frontend.entryPoints=http
         - traefik.redirectorservice.frontend.redirect.entryPoint=https
-        # Traefik service that listens to HTTPS
         - traefik.webservice.frontend.entryPoints=https
     depends_on:
       - traefik
 
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    networks:
+      - 'traefik-public'
+    deploy:
+      placement:
+        constraints:
+          - node.labels.target == fac
+    replicas: 1
+    update_config:
+      parallelism: 1
+      order: start-first
+    restart_policy:
+      max_attempts: 5
+      labels:
+        - traefik.frontend.rule=Host:prom-g3.m2gi.win
+        - traefik.enable=true
+        - traefik.port=9090
+        - traefik.tags=traefik-public
+        - traefik.docker.network=traefik-public
+        - traefik.redirectorservice.frontend.entryPoints=http
+        - traefik.redirectorservice.frontend.redirect.entryPoint=https
+        - traefik.webservice.frontend.entryPoints=https
+    depends_on:
+      - traefik
 
 networks:
   traefik-public:

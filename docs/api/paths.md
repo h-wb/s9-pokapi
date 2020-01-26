@@ -314,6 +314,37 @@ GET /api/pokemon/pokedex/{IdPokedex}
 * pokemon
 
 
+<a name="searchpokemonusingget"></a>
+### Chercher un Pokémon par nom
+```
+GET /api/pokemon/search/
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Query**|**Name**  <br>*required*|Name|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [PokemonEntity](#pokemonentity) > array|
+
+
+#### Produces
+
+* `*/*`
+
+
+#### Tags
+
+* pokemon
+
+
 <a name="getpokemonbyidusingget"></a>
 ### Récupérer un pokémon par id
 ```
@@ -414,7 +445,7 @@ DELETE /api/pokemon/{Id}
 
 
 <a name="getalltypesusingget"></a>
-### Récuperer tous les type de pokémons
+### Récuperer tous les type de Pokémons
 ```
 GET /api/type/all
 ```
@@ -438,7 +469,7 @@ GET /api/type/all
 
 
 <a name="createtypeusingpost"></a>
-### Créer un type de pokémon
+### Créer un type de Pokémon
 ```
 POST /api/type/new
 ```
@@ -473,8 +504,39 @@ POST /api/type/new
 * type
 
 
+<a name="searchpokemonusingget_1"></a>
+### Chercher un type de Pokémon par nom
+```
+GET /api/type/search/
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Query**|**Name**  <br>*required*|Name|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [TypeEntity](#typeentity) > array|
+
+
+#### Produces
+
+* `*/*`
+
+
+#### Tags
+
+* type
+
+
 <a name="gettypebyidusingget"></a>
-### Récupérer un type de pokémon par id
+### Récupérer un type de Pokémon par id
 ```
 GET /api/type/{Id}
 ```
@@ -505,7 +567,7 @@ GET /api/type/{Id}
 
 
 <a name="updatetypeusingput"></a>
-### Modifier un type de pokémon par id
+### Modifier un type de Pokémon par id
 ```
 PUT /api/type/{Id}
 ```
@@ -542,7 +604,7 @@ PUT /api/type/{Id}
 
 
 <a name="deletetypebyidusingdelete"></a>
-### Supprimer un type de pokémon par id
+### Supprimer un type de Pokémon par id
 ```
 DELETE /api/type/{Id}
 ```
