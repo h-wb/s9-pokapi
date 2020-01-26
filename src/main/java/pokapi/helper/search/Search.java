@@ -1,4 +1,4 @@
-package pokapi.helper;
+package pokapi.helper.search;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -115,7 +115,7 @@ public class Search {
      * @param str chaîne de caractère à normaliser
      * @return chaîne de caractère normalisée
      */
-    private static String deAccent(String str) {
+    public static String deAccent(String str) {
         String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(nfdNormalizedString).replaceAll("");

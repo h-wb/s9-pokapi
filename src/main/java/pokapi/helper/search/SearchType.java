@@ -1,4 +1,4 @@
-package pokapi.helper;
+package pokapi.helper.search;
 
 import org.apache.commons.lang3.StringUtils;
 import pokapi.entity.TypeEntity;
