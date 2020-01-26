@@ -29,7 +29,7 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     scrape_interval: 5s
     static_configs:
-      - targets: ['groupe3:9091']
+      - targets: ['groupe3_groupe3:9091']
 
   - job_name: 'spring-actuator-https'
     scheme: https
