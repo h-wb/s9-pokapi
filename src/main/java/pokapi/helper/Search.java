@@ -25,7 +25,7 @@ public class Search {
      * @param <T>            type de l'entité
      */
     static <T> void searchScoreEntity(List<Map.Entry<T, Integer>> entitiesScored, T entity, String name, String exp) {
-        int score = getScore(name, exp);
+        int score = getScore(name.trim(), exp.trim());
         if (score != NOT_FOUND) {
             entitiesScored.add(new AbstractMap.SimpleImmutableEntry<>(entity, score));
         }
