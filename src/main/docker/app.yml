@@ -37,7 +37,7 @@ services:
     ports:
       - 9090:9090
     configs:
-      - source: prometheus_conf5
+      - source: prometheus_conf6
         target: /etc/prometheus/prometheus.yml
 #    volumes:
 #      - "/var/jenkins_home/workspace/g3-psw/src/main/docker:/etc/prometheus/"
@@ -68,7 +68,7 @@ services:
       - traefik
 
 configs:
-  prometheus_conf5:
+  prometheus_conf6:
     file: /var/jenkins_home/workspace/g3-psw/src/main/docker/prometheus.yml
 networks:
   traefik-public:
