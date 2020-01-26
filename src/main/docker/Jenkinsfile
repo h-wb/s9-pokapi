@@ -74,5 +74,7 @@ node {
         sh "docker stack deploy -c src/main/docker/app.yml ${nomDeLimage}"
         sh "docker ps"
         sh "docker service ls"
+        sh "docker service rm pokapi_groupe3"
+        sh "docker service rm pokapi_prometheus"
     }
 }
