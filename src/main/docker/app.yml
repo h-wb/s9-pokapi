@@ -63,7 +63,7 @@ services:
 
 configs:
   prometheus_conf:
-    file: /var/jenkins_home/workspace/g3-psw/src/main/docker
+    file: /var/jenkins_home/workspace/g3-psw/src/main/docker/prometheus.yml
 networks:
   traefik-public:
     external: true
