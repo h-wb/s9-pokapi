@@ -11,11 +11,20 @@ import java.util.regex.Pattern;
 
 public class Search {
 
-    static final Integer notFound = -10;
+    private static final Integer notFound = -10;
 
     private Search() {
     }
 
+    /**
+     * Méthode permettant de lancer le calcul du score de la recherche de l'expression sur le nom donné de l'entité
+     *
+     * @param entitiesScored la liste des entités ayant un score
+     * @param entity         entité sur laquelle la recherche a lieu
+     * @param name           nom de l'entité donnée
+     * @param exp            expression recherchée
+     * @param <T>            type de l'entité
+     */
     static <T> void searchScoreEntity(List<Map.Entry<T, Integer>> entitiesScored, T entity, String name, String exp) {
         int score = getScore(name, exp);
         if (score != notFound) {
@@ -23,7 +32,14 @@ public class Search {
         }
     }
 
-    static int getScore(String entityName, String exp) {
+    /**
+     * Méthode calculant le score total de la recherche de l'expression sur le nom de l'entité
+     *
+     * @param entityName nom de l'entité sur laquelle la recherche a lieu
+     * @param exp        expression recherchée
+     * @return score de la recherche
+     */
+    private static int getScore(String entityName, String exp) {
         int maxScore = notFound;
 
         if (StringUtils.isBlank(entityName) || StringUtils.isBlank(exp)) {
@@ -38,6 +54,14 @@ public class Search {
         return maxScore;
     }
 
+    /**
+     * Méthode récursive terminale calculant le score obtenu lors de la recherche d'une expression sur le nom de l'entité
+     *
+     * @param entityName nom de l'entité sur laquelle la recherche a lieu
+     * @param exp        expression recherchée
+     * @param score      score accumulé
+     * @return score calculé ajouté au score accumulé
+     */
     private static int getScoreString(String entityName, String exp, int score) {
         if ((StringUtils.isBlank(entityName) || StringUtils.isBlank(exp)) && score == 0) {
             return notFound;
@@ -58,6 +82,13 @@ public class Search {
         }
     }
 
+    /**
+     * Méthode calculant le score obtenu lors de la comparaison de deux caractères
+     *
+     * @param entityNameLetter caractère du nom de l'entité sur laquelle la recherche a lieu
+     * @param expLetter        caractère de l'expression recherchée
+     * @return score calculé
+     */
     private static int getScoreLetter(char entityNameLetter, char expLetter) {
         if (Character.isWhitespace(expLetter) || Character.isWhitespace(entityNameLetter)) {
             return -1;
@@ -79,12 +110,25 @@ public class Search {
         }
     }
 
+    /**
+     * Méthode permettant de normaliser les caractères spéciaux ou accentués dans une chaîne de caractères
+     *
+     * @param str chaîne de caractère à normaliser
+     * @return chaîne de caractère normalisée
+     */
     private static String deAccent(String str) {
         String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(nfdNormalizedString).replaceAll("");
     }
 
+    /**
+     * Méthode permettant de savoir si le caractère donné est un espace et si le dernier score correspond à une présence d'un espace
+     *
+     * @param charToTest      caractère à tester
+     * @param lastScoreLetter dernier score
+     * @return booléen représentant la présence d'un espace
+     */
     private static Boolean currentCharEqualsSpace(char charToTest, int lastScoreLetter) {
         return lastScoreLetter == -1 && Character.isWhitespace(charToTest);
     }
