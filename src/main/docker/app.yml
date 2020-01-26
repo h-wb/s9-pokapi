@@ -52,7 +52,8 @@ services:
       restart_policy:
         max_attempts: 5
       labels:
-        - traefik.frontend.rule=Host:groupe3.m2gi.win;PathPrefixStrip:/prom/
+        - traefik.backend=prometheus
+        - traefik.frontend.rule=Host:groupe3.m2gi.win;PathPrefixStrip:/prom
         - traefik.enable=true
         - traefik.port=9090
         - traefik.tags=traefik-public
@@ -80,10 +81,11 @@ services:
       restart_policy:
         max_attempts: 5
       labels:
+        - traefik.backend=grafana
         - traefik.frontend.rule=Host:groupe3.m2gi.win
         - traefik.frontend.redirect.regex=^(.*)/grafana
         - traefik.frontend.redirect.replacement=$$1/grafana/
-        - traefik.frontend.rule=PathPrefix:/grafana;ReplacePathRegex: ^/grafana/(.*) /$$1
+        - traefik.frontend.rule=PathPrefix:/grafana;ReplacePathRegex:^/grafana/(.*) /$$1
         - traefik.enable=true
         - traefik.port=3000
         - traefik.tags=traefik-public
