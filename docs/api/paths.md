@@ -14,11 +14,14 @@ GET /api/esttype/all
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< [EstTypeEntity](#esttypeentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -45,11 +48,14 @@ GET /api/esttype/all/pokemon/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< [EstTypeEntity](#esttypeentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -76,11 +82,14 @@ GET /api/esttype/all/type/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< [EstTypeEntity](#esttypeentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -107,6 +116,10 @@ POST /api/esttype/new
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|[EstTypeEntity](#esttypeentity)|
+|**201**|Created|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Consumes
@@ -116,7 +129,7 @@ POST /api/esttype/new
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -143,11 +156,14 @@ GET /api/esttype/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|[EstTypeEntity](#esttypeentity)|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -175,6 +191,10 @@ PUT /api/esttype/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|object|
+|**201**|Created|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Consumes
@@ -184,7 +204,7 @@ PUT /api/esttype/{Id}
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -211,11 +231,14 @@ DELETE /api/esttype/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< string, boolean > map|
+|**204**|No Content|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -235,11 +258,14 @@ GET /api/pokemon/all
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< [PokemonEntity](#pokemonentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -266,6 +292,10 @@ POST /api/pokemon/new
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|[PokemonEntity](#pokemonentity)|
+|**201**|Created|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Consumes
@@ -275,7 +305,7 @@ POST /api/pokemon/new
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -302,11 +332,14 @@ GET /api/pokemon/pokedex/{IdPokedex}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< [PokemonEntity](#pokemonentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -333,11 +366,14 @@ GET /api/pokemon/search/
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< [PokemonEntity](#pokemonentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -364,11 +400,14 @@ GET /api/pokemon/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|[PokemonEntity](#pokemonentity)|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -396,6 +435,10 @@ PUT /api/pokemon/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|object|
+|**201**|Created|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Consumes
@@ -405,7 +448,7 @@ PUT /api/pokemon/{Id}
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -432,11 +475,14 @@ DELETE /api/pokemon/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< string, boolean > map|
+|**204**|No Content|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -456,11 +502,14 @@ GET /api/type/all
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< [TypeEntity](#typeentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -487,6 +536,10 @@ POST /api/type/new
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|[TypeEntity](#typeentity)|
+|**201**|Created|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Consumes
@@ -496,7 +549,7 @@ POST /api/type/new
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -523,11 +576,14 @@ GET /api/type/search/
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< [TypeEntity](#typeentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -554,11 +610,14 @@ GET /api/type/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|[TypeEntity](#typeentity)|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -586,6 +645,10 @@ PUT /api/type/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|object|
+|**201**|Created|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Consumes
@@ -595,7 +658,7 @@ PUT /api/type/{Id}
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
@@ -622,11 +685,14 @@ DELETE /api/type/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< string, boolean > map|
+|**204**|No Content|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
