@@ -5,7 +5,7 @@ services:
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m -XX:+UseSerialGC -Xss512k
     ports:
-      - 9091:9090
+      - 9091:8080
     networks:
       - 'traefik-public'
     deploy:
@@ -37,7 +37,7 @@ services:
     ports:
       - 9090:9090
     configs:
-      - source: prometheus_conf6
+      - source: prometheus_conf7
         target: /etc/prometheus/prometheus.yml
 #    volumes:
 #      - "/var/jenkins_home/workspace/g3-psw/src/main/docker:/etc/prometheus/"
@@ -68,7 +68,7 @@ services:
       - traefik
 
 configs:
-  prometheus_conf6:
+  prometheus_conf7:
     file: /var/jenkins_home/workspace/g3-psw/src/main/docker/prometheus.yml
 networks:
   traefik-public:
