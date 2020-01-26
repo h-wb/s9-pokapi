@@ -19,7 +19,6 @@ public class SwaggerConfig {
     public Docket api(ApiInfo apiInfo) {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("pokapi")
-                .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo)
                 .select()
                 .paths(regex("/api/.*"))
