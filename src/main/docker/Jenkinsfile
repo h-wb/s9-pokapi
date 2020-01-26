@@ -72,9 +72,20 @@ node {
         // remplacement de la version par le numéro de commit
         sh "sed -i -E 's=m2gi/${nomDeLimage}:latest?=m2gi/${nomDeLimage}:${commitId}=g' src/main/docker/app.yml"
         sh "docker stack deploy -c src/main/docker/app.yml ${nomDeLimage}"
+        sh "docker run -d --name=prometheus -v ./src/main/resources:/etc/prometheus/prometheus.yml prom/prometheus --config.file=/etc/prometheus/prometheus.yml" +
+                "-l traefik.frontend.rule=Host:prom-g3.m2gi.win" +
+                "-l traefik.enable=true" +
+                "-l traefik.port=9090" +
+                "-l traefik.tags=traefik-public" +
+                "-l traefik.docker.network=traefik-public" +
+                "-l traefik.redirectorservice.frontend.entryPoints=http" +
+                "-l traefik.redirectorservice.frontend.redirect.entryPoint=https" +
+                "-l traefik.webservice.frontend.entryPoints=https"
         sh "docker ps"
         sh "docker service ls"
-        sh "docker service rm pokapi_groupe3"
-        sh "docker service rm pokapi_prometheus"
+        sh "docker stop pokapi_groupe3.1.982k3qdwi90qof84ry0a65csh"
+        sh "docker rm pokapi_groupe3.1.982k3qdwi90qof84ry0a65csh"
+        sh "docker ps"
+
     }
 }

@@ -28,35 +28,35 @@ services:
     depends_on:
       - traefik
 
-  prometheus:
-    image: prom/prometheus:latest
-    volumes:
-      - ./src/main/resources:/etc/prometheus/
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-    networks:
-      - 'traefik-public'
-    deploy:
-      placement:
-        constraints:
-          - node.labels.target == fac
-      replicas: 1
-      update_config:
-        parallelism: 1
-        order: start-first
-      restart_policy:
-        max_attempts: 5
-      labels:
-        - traefik.frontend.rule=Host:prom-g3.m2gi.win
-        - traefik.enable=true
-        - traefik.port=9090
-        - traefik.tags=traefik-public
-        - traefik.docker.network=traefik-public
-        - traefik.redirectorservice.frontend.entryPoints=http
-        - traefik.redirectorservice.frontend.redirect.entryPoint=https
-        - traefik.webservice.frontend.entryPoints=https
-    depends_on:
-      - traefik
+#  prometheus:
+#    image: prom/prometheus:latest
+#    volumes:
+#      - ./src/main/resources:/etc/prometheus/
+#    command:
+#      - '--config.file=/etc/prometheus/prometheus.yml'
+#    networks:
+#      - 'traefik-public'
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.labels.target == fac
+#      replicas: 1
+#      update_config:
+#        parallelism: 1
+#        order: start-first
+#      restart_policy:
+#        max_attempts: 5
+#      labels:
+#        - traefik.frontend.rule=Host:prom-g3.m2gi.win
+#        - traefik.enable=true
+#        - traefik.port=9090
+#        - traefik.tags=traefik-public
+#        - traefik.docker.network=traefik-public
+#        - traefik.redirectorservice.frontend.entryPoints=http
+#        - traefik.redirectorservice.frontend.redirect.entryPoint=https
+#        - traefik.webservice.frontend.entryPoints=https
+#    depends_on:
+#      - traefik
 
 networks:
   traefik-public:
