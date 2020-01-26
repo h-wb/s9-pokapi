@@ -72,7 +72,10 @@ node {
         // remplacement de la version par le numéro de commit
         sh "sed -i -E 's=m2gi/${nomDeLimage}:latest?=m2gi/${nomDeLimage}:${commitId}=g' src/main/docker/app.yml"
         sh "docker stack deploy -c src/main/docker/app.yml ${nomDeLimage}"
-        sh "docker run -d --name=prometheus -v /src/main/resources:/etc/prometheus/ prom/prometheus --config.file=/etc/prometheus/prometheus.yml" +
+        sh "docker stop prometheus"
+        sh "docker rm prometheus"
+        sh "docker stop groupe3_prometheus"
+        sh "docker run -d --name=groupe3_prometheus -v /src/main/resources:/etc/prometheus/ prom/prometheus --config.file=/etc/prometheus/prometheus.yml" +
                 "-l traefik.frontend.rule=Host:prom-g3.m2gi.win" +
                 "-l traefik.enable=true" +
                 "-l traefik.port=9090" +
