@@ -50,7 +50,7 @@ services:
       restart_policy:
         max_attempts: 5
       labels:
-        - traefik.frontend.rule=Host:groupe3.m2gi.win;AddPrefix:/prom
+        - traefik.frontend.rule=Host:groupe3.m2gi.win;PathPrefixStrip:/prom/
         - traefik.enable=true
         - traefik.port=9090
         - traefik.tags=traefik-public
