@@ -17,7 +17,7 @@ services:
       restart_policy:
         max_attempts: 5
       labels:
-        - traefik.frontend.rule=Host:groupe3.m2gi.win
+        - traefik.frontend.rule=Host:groupe3.m2gi.win;PathPrefixStrip:/app/
         - traefik.enable=true
         - traefik.port=8080
         - traefik.tags=traefik-public
