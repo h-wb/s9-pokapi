@@ -80,7 +80,7 @@ services:
       restart_policy:
         max_attempts: 5
       labels:
-        - traefik.frontend.rule=Host:groupe3.m2gi.win;PathPrefixStrip:/grafana/
+        - traefik.frontend.rule=Host:groupe3.m2gi.win;Path:/grafana
         - traefik.enable=true
         - traefik.port=3000
         - traefik.tags=traefik-public
