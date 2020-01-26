@@ -3,6 +3,7 @@ package pokapi.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pokapi.dto.PokemonDTO;
@@ -30,14 +31,14 @@ public class PokemonController {
     }
 
     @ApiOperation(value = "Récuperer tous les pokémons")
-    @GetMapping("/all")
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<PokemonEntity> getAllPokemons() {
         return (List<PokemonEntity>) pokemonRepository.findAll();
     }
 
     @ApiOperation(value = "Récuperer les pokémons par id Pokédex")
-    @GetMapping("/pokedex/{IdPokedex}")
+    @GetMapping(value = "/pokedex/{IdPokedex}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<PokemonEntity> getAllPokemonsByPokedexId(@PathVariable final Long IdPokedex) {
         return ((List<PokemonEntity>) pokemonRepository.findAll()).stream()
@@ -46,14 +47,14 @@ public class PokemonController {
     }
 
     @ApiOperation(value = "Créer un pokémon")
-    @PostMapping("/new")
+    @PostMapping(value = "/new", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public PokemonEntity createPokemon(@Valid @RequestBody PokemonDTO pokemonDTO) {
         return pokemonRepository.save(new PokemonEntity(pokemonDTO));
     }
 
     @ApiOperation(value = "Récupérer un pokémon par id")
-    @GetMapping("/{Id}")
+    @GetMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<PokemonEntity> getPokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
         PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
@@ -62,7 +63,7 @@ public class PokemonController {
     }
 
     @ApiOperation(value = "Supprimer un pokémon par id")
-    @DeleteMapping("/{Id}")
+    @DeleteMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Map<String, Boolean> deletePokemonById(@PathVariable final Long Id) throws ResourceNotFoundException {
         PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
@@ -75,7 +76,7 @@ public class PokemonController {
     }
 
     @ApiOperation(value = "Modifier un pokémon par id")
-    @PutMapping("/{Id}")
+    @PutMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Object> updatePokemon(@PathVariable final long Id, @Valid @RequestBody PokemonDTO pokemonDTO) throws ResourceNotFoundException {
         PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
@@ -88,7 +89,7 @@ public class PokemonController {
     }
 
     @ApiOperation(value = "Chercher un Pokémon par nom")
-    @GetMapping("/search/")
+    @GetMapping(value = "/search/", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<PokemonEntity> searchPokemon(@RequestParam(value = "Name") String exp) {
         return SearchPokemon.searchScore((List<PokemonEntity>) pokemonRepository.findAll(), exp);

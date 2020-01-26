@@ -3,6 +3,7 @@ package pokapi.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pokapi.dto.EstTypeDTO;
@@ -29,14 +30,14 @@ public class EstTypeController {
     }
 
     @ApiOperation(value = "Récupérer tous les liens entre les Pokémons et les types")
-    @GetMapping("/all")
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<EstTypeEntity> getAllLiensEstType() {
         return (List<EstTypeEntity>) estTypeRepository.findAll();
     }
 
     @ApiOperation(value = "Récupérer tous les liens entre un Pokémon et ses types par l'id du Pokémon")
-    @GetMapping("/all/pokemon/{Id}")
+    @GetMapping(value = "/all/pokemon/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<EstTypeEntity> getAllLiensEstTypeByPokemon(@PathVariable final Long Id) {
         List<EstTypeEntity> estTypeEntities = getAllLiensEstType();
@@ -47,7 +48,7 @@ public class EstTypeController {
     }
 
     @ApiOperation(value = "Récupérer tous les liens entre les Pokémons et un type par l'id du type")
-    @GetMapping("/all/type/{Id}")
+    @GetMapping(value = "/all/type/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<EstTypeEntity> getAllLiensEstTypeByType(@PathVariable final Long Id) {
         List<EstTypeEntity> estTypeEntities = getAllLiensEstType();
@@ -58,14 +59,14 @@ public class EstTypeController {
     }
 
     @ApiOperation(value = "Créer un lien entre un Pokémon et un type")
-    @PostMapping("/new")
+    @PostMapping(value = "/new", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public EstTypeEntity createLienEstType(@Valid @RequestBody EstTypeDTO estTypeDTO) {
         return estTypeRepository.save(new EstTypeEntity(estTypeDTO));
     }
 
     @ApiOperation(value = "Récupérer un lien entre un Pokémon et un type par id")
-    @GetMapping("/{Id}")
+    @GetMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<EstTypeEntity> getLienEstTypeById(@PathVariable final Long Id) throws ResourceNotFoundException {
         EstTypeEntity estTypeEntity = estTypeRepository.findById(Id)
@@ -74,7 +75,7 @@ public class EstTypeController {
     }
 
     @ApiOperation(value = "Supprimer un lien entre un Pokémon et un type par id")
-    @DeleteMapping("/{Id}")
+    @DeleteMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Map<String, Boolean> deleteLienEstType(@PathVariable final Long Id) throws ResourceNotFoundException {
         EstTypeEntity estTypeEntity = estTypeRepository.findById(Id)
@@ -87,7 +88,7 @@ public class EstTypeController {
     }
 
     @ApiOperation(value = "Modifier un lien entre un Pokémon et un type par id")
-    @PutMapping("/{Id}")
+    @PutMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Object> updateLienEstType(@PathVariable final Long Id, @Valid @RequestBody EstTypeDTO estTypeDTO) throws ResourceNotFoundException {
         EstTypeEntity estTypeEntity = estTypeRepository.findById(Id)
