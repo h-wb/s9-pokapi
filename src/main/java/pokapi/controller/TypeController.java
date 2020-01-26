@@ -3,6 +3,7 @@ package pokapi.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pokapi.dto.TypeDTO;
@@ -29,21 +30,21 @@ public class TypeController {
     }
 
     @ApiOperation(value = "Récuperer tous les type de Pokémons")
-    @GetMapping("/all")
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<TypeEntity> getAllTypes() {
         return typeRepository.findAll();
     }
 
     @ApiOperation(value = "Créer un type de Pokémon")
-    @PostMapping("/new")
+    @PostMapping(value = "/new", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public TypeEntity createType(@Valid @RequestBody TypeDTO typeDTO) {
         return typeRepository.save(new TypeEntity(typeDTO));
     }
 
     @ApiOperation(value = "Récupérer un type de Pokémon par id")
-    @GetMapping("/{Id}")
+    @GetMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<TypeEntity> getTypeById(@PathVariable final Long Id) throws ResourceNotFoundException {
         TypeEntity typeEntity = typeRepository.findById(Id)
@@ -52,7 +53,7 @@ public class TypeController {
     }
 
     @ApiOperation(value = "Supprimer un type de Pokémon par id")
-    @DeleteMapping("/{Id}")
+    @DeleteMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Map<String, Boolean> deleteTypeById(@PathVariable final Long Id) throws ResourceNotFoundException {
         TypeEntity typeEntity = typeRepository.findById(Id)
@@ -65,7 +66,7 @@ public class TypeController {
     }
 
     @ApiOperation(value = "Modifier un type de Pokémon par id")
-    @PutMapping("/{Id}")
+    @PutMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Object> updateType(@PathVariable final long Id, @Valid @RequestBody TypeDTO typeDTO) throws ResourceNotFoundException {
         TypeEntity typeEntity = typeRepository.findById(Id)
@@ -77,7 +78,7 @@ public class TypeController {
     }
 
     @ApiOperation(value = "Chercher un type de Pokémon par nom")
-    @GetMapping("/search/")
+    @GetMapping(value = "/search/", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<TypeEntity> searchPokemon(@RequestParam(value = "Name") String exp) {
         return SearchType.searchScore(typeRepository.findAll(), exp);
