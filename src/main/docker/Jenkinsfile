@@ -27,30 +27,30 @@ node {
             )
         }
 
-      stage('clean') {
-            sh "./mvnw clean"
-        }
-
-        stage('backend tests') {
-            try {
-                sh "./mvnw test"
-            } catch (err) {
-                throw err
-            } finally {
-                junit '**/target/surefire-reports/TEST-*.xml'
-            }
-        }
-
-        stage('packaging') {
-            sh "./mvnw verify -DskipTests"
-            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-        }
-
-        stage('Analyse SonarQube') {
-            withSonarQubeEnv('sonarqube') {
-                sh "./mvnw sonar:sonar"
-            }
-        }
+//      stage('clean') {
+//            sh "./mvnw clean"
+//        }
+//
+//        stage('backend tests') {
+//            try {
+//                sh "./mvnw test"
+//            } catch (err) {
+//                throw err
+//            } finally {
+//                junit '**/target/surefire-reports/TEST-*.xml'
+//            }
+//        }
+//
+//        stage('packaging') {
+//            sh "./mvnw verify -DskipTests"
+//            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+//        }
+//
+//        stage('Analyse SonarQube') {
+//            withSonarQubeEnv('sonarqube') {
+//                sh "./mvnw sonar:sonar"
+//            }
+//        }
 
         stage('preparing docker') {
             sh "cp -R src/main/docker/* target/"
