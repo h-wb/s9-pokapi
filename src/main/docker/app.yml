@@ -81,6 +81,9 @@ services:
         max_attempts: 5
       labels:
         - traefik.frontend.rule=Host:groupe3.m2gi.win;PathPrefixStrip:/grafana
+        - "traefik.frontend.redirect.regex=^(.*)/grafana"
+        - "traefik.frontend.redirect.replacement=$$1/grafana/"
+        - "traefik.frontend.rule=PathPrefix:/grafana;ReplacePathRegex: ^/grafana/(.*) /$$1"
         - traefik.enable=true
         - traefik.port=3000
         - traefik.tags=traefik-public
