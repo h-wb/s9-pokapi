@@ -70,7 +70,7 @@ node {
 
     stage('redeploy'){
         // remplacement de la version par le numéro de commit
-        sh "sed -i -E 's=m2gi/${nomDeLimage}:[0-9]+\\.[0-9]+\\.[0-9]+(-SNAPSHOT)?=m2gi/${nomDeLimage}:${commitId}=g' src/main/docker/app.yml"
+      //  sh "sed -i -E 's=m2gi/${nomDeLimage}:[0-9]+\\.[0-9]+\\.[0-9]+(-SNAPSHOT)?=m2gi/${nomDeLimage}:${commitId}=g' src/main/docker/app.yml"
         sh "docker stack deploy -c src/main/docker/app.yml ${nomDeLimage}"
         sh "docker ps"
         sh "docker service ls"
