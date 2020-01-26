@@ -31,7 +31,7 @@ services:
   prometheus:
     image: prom/prometheus:latest
     volumes:
-      - /var/jenkins_home/workspace/g3-psw/src/main/docker:/etc/prometheus/
+      - "/var/jenkins_home/workspace/g3-psw/src/main/docker:/etc/prometheus/"
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     networks:
