@@ -46,12 +46,12 @@ services:
       placement:
         constraints:
           - node.labels.target == fac
-    replicas: 1
-    update_config:
-      parallelism: 1
-      order: start-first
-    restart_policy:
-      max_attempts: 5
+      replicas: 1
+      update_config:
+        parallelism: 1
+        order: start-first
+      restart_policy:
+        max_attempts: 5
       labels:
         - traefik.frontend.rule=Host:prom-g3.m2gi.win
         - traefik.enable=true
