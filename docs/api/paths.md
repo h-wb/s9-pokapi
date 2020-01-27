@@ -190,7 +190,7 @@ PUT /api/esttype/{Id}
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|object|
+|**200**|OK|[EstTypeEntity](#esttypeentity)|
 |**201**|Created|No Content|
 |**401**|Unauthorized|No Content|
 |**403**|Forbidden|No Content|
@@ -266,6 +266,42 @@ GET /api/pokemon/all
 #### Produces
 
 * `application/json`
+
+
+#### Tags
+
+* pokemon
+
+
+<a name="exportpokemonsusingget"></a>
+### Exporter des Pokémons par nom
+```
+GET /api/pokemon/export/
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Query**|**Extension**  <br>*required*|Format du fichier|enum (xlsx, csv)|
+|**Query**|**Name**  <br>*optional*|Name|string|
+|**Query**|**Version**  <br>*required*|Version à exporter|enum (full, light)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[InputStreamResource](#inputstreamresource)|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Produces
+
+* `*/*`
 
 
 #### Tags
@@ -358,7 +394,7 @@ GET /api/pokemon/search/
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Query**|**Name**  <br>*required*|Name|string|
+|**Query**|**Name**  <br>*optional*|Name|string|
 
 
 #### Responses
@@ -434,7 +470,7 @@ PUT /api/pokemon/{Id}
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|object|
+|**200**|OK|[PokemonEntity](#pokemonentity)|
 |**201**|Created|No Content|
 |**401**|Unauthorized|No Content|
 |**403**|Forbidden|No Content|
@@ -557,7 +593,7 @@ POST /api/type/new
 * type
 
 
-<a name="searchpokemonusingget_1"></a>
+<a name="searchtypeusingget"></a>
 ### Chercher un type de Pokémon par nom
 ```
 GET /api/type/search/
@@ -644,7 +680,7 @@ PUT /api/type/{Id}
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|object|
+|**200**|OK|[TypeEntity](#typeentity)|
 |**201**|Created|No Content|
 |**401**|Unauthorized|No Content|
 |**403**|Forbidden|No Content|
