@@ -158,7 +158,6 @@ public class PokemonControllerTest {
         assertEquals(updated.getIdPokedex(), pokemonEntityArgumentCaptor.getValue().getIdPokedex());
 
         assertEquals(pokemonEntity, returned.getBody());
-
     }
 
     @Test
