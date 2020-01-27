@@ -340,33 +340,6 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>surefire</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>unit-tests</id>
-                                <phase>test</phase>
-                                <goals>
-                                    <goal>test</goal>
-                                </goals>
-                                <configuration>
-                                    <!-- Never skip running the tests when the test phase is invoked -->
-                                    <skip>false</skip>
-                                    <includes>
-                                        <!-- Include unit tests within integration-test phase. -->
-                                        <include>**/*Test.java</include>
-                                    </includes>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
 
 </project>
