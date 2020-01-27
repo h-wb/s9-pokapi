@@ -32,9 +32,9 @@ public class PokemonsExportVersionLightTest {
         PokemonsExportVersionLight pokemonsExportVersionLight = new PokemonsExportVersionLight("", null);
         List<String> headerColumns = pokemonsExportVersionLight.getPokemonsHeaderColumns();
 
-        assertEquals(headerColumns.get(0), "Id");
-        assertEquals(headerColumns.get(1), "Nom");
-        assertEquals(headerColumns.get(2), "Id Pokédex");
+        assertEquals("Id", headerColumns.get(0));
+        assertEquals("Nom", headerColumns.get(1));
+        assertEquals("Id Pokédex", headerColumns.get(2));
     }
 
     @Test

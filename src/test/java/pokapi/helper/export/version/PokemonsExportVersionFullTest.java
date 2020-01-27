@@ -34,10 +34,10 @@ public class PokemonsExportVersionFullTest {
         PokemonsExportVersionFull pokemonsExportVersionFull = new PokemonsExportVersionFull("", null, null, null);
         List<String> headerColumns = pokemonsExportVersionFull.getPokemonsHeaderColumns();
 
-        assertEquals(headerColumns.get(0), "Id");
-        assertEquals(headerColumns.get(1), "Nom");
-        assertEquals(headerColumns.get(2), "Id Pokédex");
-        assertEquals(headerColumns.get(3), "Type(s)");
+        assertEquals("Id", headerColumns.get(0));
+        assertEquals("Nom", headerColumns.get(1));
+        assertEquals("Id Pokédex", headerColumns.get(2));
+        assertEquals("Type(s)", headerColumns.get(3));
     }
 
     @Test
