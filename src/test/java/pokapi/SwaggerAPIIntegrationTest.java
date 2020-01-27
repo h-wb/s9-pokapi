@@ -1,13 +1,5 @@
 package pokapi;
 
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvcBuilder;
-import org.springframework.web.servlet.DispatcherServlet;
-import pokapi.configuration.SwaggerConfig;
-import pokapi.repository.EstTypeRepository;
-import pokapi.repository.PokemonRepository;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,8 +11,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import pokapi.configuration.SwaggerConfig;
+import pokapi.repository.EstTypeRepository;
+import pokapi.repository.PokemonRepository;
 import pokapi.repository.TypeRepository;
-
 
 import java.io.File;
 import java.io.FileWriter;
@@ -43,7 +37,6 @@ public class SwaggerAPIIntegrationTest {
 
 
     @Test
-    @WithMockUser(username = "admin", password = "admin", roles = "USER")
     public void swaggerJsonExists() throws Exception {
         String contentAsString = mockMvc
                 .perform(MockMvcRequestBuilders.get("/v2/api-docs")
