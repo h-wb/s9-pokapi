@@ -143,7 +143,7 @@ public class PokemonController {
                 (StringUtils.isBlank(exp) ? "" : "_" + exp.trim()) +
                 "." + pokemonsExportVersion.getExtension();
 
-        if (!headerValue.matches("[a-zA-Z0-9]++"))
+        if (!headerValue.matches("[a-zA-Z0-9\\.;=_ ]+"))
             throw new IOException();
 
         headers.add(HttpHeaders.CONTENT_DISPOSITION, headerValue);
