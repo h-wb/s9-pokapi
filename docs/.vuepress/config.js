@@ -35,6 +35,13 @@ const sidebars = {
 }
 
 module.exports = {
+    configureWebpack: {
+        resolve: {
+            alias: {
+                '@resources': '../resources'
+            }
+        }
+    },
     base: '/Pokapi/',
     title: 'Pokapi',
     description: 'API Pokemon créée dans le cadre du M2 GI',
