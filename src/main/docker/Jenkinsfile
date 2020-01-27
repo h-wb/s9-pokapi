@@ -33,7 +33,7 @@ node {
 
         stage('backend tests') {
             try {
-                sh "./mvnw test"
+                sh "./mvnw test -P !setHooks"
             } catch (err) {
                 throw err
             } finally {
@@ -42,7 +42,7 @@ node {
         }
 
         stage('packaging') {
-            sh "./mvnw verify -DskipTests"
+            sh "./mvnw verify -DskipTests -P !setHooks"
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
         }
 
