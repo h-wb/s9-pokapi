@@ -68,7 +68,7 @@ public class TypeController {
     @ApiOperation(value = "Modifier un type de Pokémon par id")
     @PutMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Object> updateType(@PathVariable final long Id, @Valid @RequestBody TypeDTO typeDTO) throws ResourceNotFoundException {
+    public ResponseEntity<TypeEntity> updateType(@PathVariable final long Id, @Valid @RequestBody TypeDTO typeDTO) throws ResourceNotFoundException {
         TypeEntity typeEntity = typeRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException(ERROR_TYPE_ID_NOT_FOUND + Id));
 
@@ -80,7 +80,7 @@ public class TypeController {
     @ApiOperation(value = "Chercher un type de Pokémon par nom")
     @GetMapping(value = "/search/", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<TypeEntity> searchPokemon(@RequestParam(value = "Name") String exp) {
+    public List<TypeEntity> searchType(@RequestParam(value = "Name") String exp) {
         return SearchType.searchScore(typeRepository.findAll(), exp);
     }
 }
