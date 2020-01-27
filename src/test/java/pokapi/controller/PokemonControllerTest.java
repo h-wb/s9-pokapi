@@ -13,10 +13,6 @@ import pokapi.entity.EstTypeEntity;
 import pokapi.entity.PokemonEntity;
 import pokapi.entity.TypeEntity;
 import pokapi.exception.ResourceNotFoundException;
-import pokapi.helper.export.ExportCSV;
-import pokapi.helper.export.ExportXLSX;
-import pokapi.helper.export.version.PokemonsExportVersion;
-import pokapi.helper.export.version.PokemonsExportVersionFull;
 import pokapi.repository.EstTypeRepository;
 import pokapi.repository.PokemonRepository;
 import pokapi.repository.TypeRepository;
@@ -27,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -191,33 +188,24 @@ public class PokemonControllerTest {
 
         List<TypeEntity> typeEntities = new ArrayList<>();
         List<EstTypeEntity> estTypeEntities = new ArrayList<>();
-        String extension = "xlsx";
 
         when(pokemonRepository.findAll()).thenReturn(pokemonEntities);
         when(typeRepository.findAll()).thenReturn(typeEntities);
         when(estTypeRepository.findAll()).thenReturn(estTypeEntities);
 
-        ResponseEntity<InputStreamResource> returned = pokemonController.exportPokemons(extension, "full", "bulb");
-        ResponseEntity<InputStreamResource> returnedBad = pokemonController.exportPokemons(extension, "full", "test");
-        ResponseEntity<InputStreamResource> returnedCsv = pokemonController.exportPokemons("csv", "light", "test");
+        ResponseEntity<InputStreamResource> returned = pokemonController.exportPokemons("xlsx", "full", "bulb");
+        ResponseEntity<InputStreamResource> returnedCsv = pokemonController.exportPokemons("csv", "light", "bulb");
         ResponseEntity<InputStreamResource> returnedEmptyExp = pokemonController.exportPokemons("csv", "light", "");
 
-        PokemonsExportVersion exportVersion = new PokemonsExportVersionFull(extension, pokemonEntities, typeEntities, estTypeEntities);
-        InputStreamResource expected1 = new InputStreamResource(ExportXLSX.export(exportVersion));
-        InputStreamResource expected2 = new InputStreamResource(ExportXLSX.export(exportVersion));
-        InputStreamResource expectedCsv = new InputStreamResource(ExportCSV.export(exportVersion));
-        InputStreamResource expectedEmptyExp = new InputStreamResource(ExportCSV.export(exportVersion));
-
-        verify(pokemonRepository, times(4)).findAll();
-        verify(typeRepository, times(4)).findAll();
-        verify(estTypeRepository, times(4)).findAll();
+        verify(pokemonRepository, times(3)).findAll();
+        verify(typeRepository, times(3)).findAll();
+        verify(estTypeRepository, times(3)).findAll();
         verifyNoMoreInteractions(pokemonRepository);
         verifyNoMoreInteractions(typeRepository);
         verifyNoMoreInteractions(estTypeRepository);
 
-        assertEquals(expected1.contentLength(), Objects.requireNonNull(returned.getBody()).contentLength());
-        assertNotEquals(expected2.contentLength(), Objects.requireNonNull(returnedBad.getBody()).contentLength());
-        assertNotEquals(expectedCsv.contentLength(), Objects.requireNonNull(returnedCsv.getBody()).contentLength());
-        assertNotEquals(expectedEmptyExp.contentLength(), Objects.requireNonNull(returnedEmptyExp.getBody()).contentLength());
+        assertThat(Objects.requireNonNull(returned.getBody()).contentLength(), greaterThan(0L));
+        assertThat(Objects.requireNonNull(returnedCsv.getBody()).contentLength(), greaterThan(0L));
+        assertThat(Objects.requireNonNull(returnedEmptyExp.getBody()).contentLength(), greaterThan(0L));
     }
 }
