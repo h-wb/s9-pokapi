@@ -15,42 +15,42 @@ node {
     // si jenkins est dans un docker, il faut rajouter -u root
     docker.image('openjdk:8').inside('-u root -e MAVEN_OPTS="-Duser.home=./"') {
 
-//       stage('check tools') {
-//            parallel(
-//                    java: {
-//                        sh "java -version"
-//                    },
-//                    maven: {
-//                        sh "chmod +x mvnw"
-//                        sh "./mvnw -version"
-//                    }
-//            )
-//        }
-//
-//      stage('clean') {
-//            sh "./mvnw clean"
-//        }
-//
-//        stage('backend tests') {
-//            try {
-//                sh "./mvnw test"
-//            } catch (err) {
-//                throw err
-//            } finally {
-//                junit '**/target/surefire-reports/TEST-*.xml'
-//            }
-//        }
-//
-//        stage('packaging') {
-//            sh "./mvnw verify -DskipTests"
-//            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-//        }
-//
-//        stage('Analyse SonarQube') {
-//            withSonarQubeEnv('sonarqube') {
-//                sh "./mvnw sonar:sonar"
-//            }
-//        }
+       stage('check tools') {
+            parallel(
+                    java: {
+                        sh "java -version"
+                    },
+                    maven: {
+                        sh "chmod +x mvnw"
+                        sh "./mvnw -version"
+                    }
+            )
+        }
+
+      stage('clean') {
+            sh "./mvnw clean"
+        }
+
+        stage('backend tests') {
+            try {
+                sh "./mvnw test"
+            } catch (err) {
+                throw err
+            } finally {
+                junit '**/target/surefire-reports/TEST-*.xml'
+            }
+        }
+
+        stage('packaging') {
+            sh "./mvnw verify -DskipTests"
+            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+        }
+
+        stage('Analyse SonarQube') {
+            withSonarQubeEnv('sonarqube') {
+                sh "./mvnw sonar:sonar"
+            }
+        }
 
         stage('preparing docker') {
             sh "cp -R src/main/docker/* target/"
