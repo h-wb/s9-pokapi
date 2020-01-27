@@ -48,7 +48,7 @@ node {
 
         stage('Analyse SonarQube') {
             withSonarQubeEnv('sonarqube') {
-                sh "./mvnw sonar:sonar -Pcoverage"
+                sh "./mvnw sonar:sonar -Psurefire"
             }
         }
 
