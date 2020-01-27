@@ -42,13 +42,13 @@ node {
         }
 
         stage('packaging') {
-            sh "./mvnw verify -DskipTests -P-set-hooks"
+            sh "./mvnw verify -DskipTests -Pdev -P-set-hooks"
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
         }
 
         stage('Analyse SonarQube') {
             withSonarQubeEnv('sonarqube') {
-                sh "./mvnw sonar:sonar"
+                sh "./mvnw sonar:sonar -Pcoverage"
             }
         }
 
