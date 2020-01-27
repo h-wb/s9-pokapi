@@ -33,7 +33,7 @@ node {
 
         stage('backend tests') {
             try {
-                sh "./mvnw test -Psurefire -P-set-hooks,-dev"
+                sh "./mvnw test -Psurefire -Pcoverage -P-set-hooks,-dev"
             } catch (err) {
                 throw err
             } finally {
