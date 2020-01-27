@@ -4,7 +4,7 @@ const sidebars = {
             title: 'Guide',
             collapsable: false,
             children: [
-                '/guide/test'
+                '/guide/nouveau_dev'
             ]
         },
     ],
@@ -46,7 +46,7 @@ module.exports = {
 
         nav: [{
             text: 'Guide',
-            link: '/guide/test'
+            link: '/guide/nouveau_dev'
         },
             {
                 text: 'API',
