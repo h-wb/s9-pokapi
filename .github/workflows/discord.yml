@@ -18,7 +18,7 @@ jobs:
         DISCORD_AVATAR: https://i.pinimg.com/originals/76/47/9d/76479dd91dc55c2768ddccfc30a4fbf5.png
       uses: Ilshidur/action-discord@master
       with:
-        args: 'Nouveau commit sur h-wb/Pokapi (Pika pika ^^)'
+        args: 'Nouveau commit sur h-wb/Pokapi'
     - name: Discord notification
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
