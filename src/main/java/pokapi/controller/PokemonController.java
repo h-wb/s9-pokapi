@@ -128,6 +128,10 @@ public class PokemonController {
         List<TypeEntity> typeEntities = typeRepository.findAll();
         List<EstTypeEntity> estTypeEntities = (List<EstTypeEntity>) estTypeRepository.findAll();
 
+        // Allow only alphanumeric characters
+        if (!extension.matches("[a-zA-Z0-9]++"))
+            throw new IOException();
+
         HashMap<String, String> contentTypes = new HashMap<>();
         contentTypes.put("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         contentTypes.put("csv", "text/csv; charset=utf-8");
