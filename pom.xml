@@ -186,24 +186,6 @@
                                 </configuration>
                             </execution>
                             <execution>
-                                <id>init gitmoji</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>run gitmoji</arguments>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>prepare hooks</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>run prepare:hooks</arguments>
-                                </configuration>
-                            </execution>
-                            <execution>
                                 <id>sync version to package.json</id>
                                 <goals>
                                     <goal>npm</goal>
@@ -237,7 +219,7 @@
             </build>
         </profile>
         <profile>
-            <id>setHooks</id>
+            <id>set-hooks</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
