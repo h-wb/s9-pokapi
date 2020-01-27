@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import pokapi.dto.TypeDTO;
 import pokapi.entity.TypeEntity;
 import pokapi.exception.ResourceNotFoundException;
-import pokapi.helper.SearchType;
+import pokapi.helper.search.SearchType;
 import pokapi.repository.TypeRepository;
 
 import javax.validation.Valid;
