@@ -138,11 +138,15 @@ public class PokemonController {
 
         ByteArrayInputStream in = extension.equals("xlsx") ? ExportXLSX.export(pokemonsExportVersion) : ExportCSV.export(pokemonsExportVersion);
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +
+        String headerValue = "attachment; filename=" +
                 pokemonsExportVersion.getFileName() +
                 (StringUtils.isBlank(exp) ? "" : "_" + exp.trim()) +
-                "." + pokemonsExportVersion.getExtension()
-        );
+                "." + pokemonsExportVersion.getExtension();
+
+        if (!headerValue.matches("[a-zA-Z0-9]++"))
+            throw new IOException();
+
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, headerValue);
 
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentTypes.get(extension))).headers(headers).body(new InputStreamResource(in));
     }
