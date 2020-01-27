@@ -63,7 +63,7 @@ node {
             def dockerImage = docker.build("m2gi/${nomDeLimage}:${commitId}", 'target')
         } catch (err) {
             throw err
-        } finally {
+        } finally {git
             sh "docker tag m2gi/${nomDeLimage}:${commitId} m2gi/${nomDeLimage}:latest"
         }
     }
