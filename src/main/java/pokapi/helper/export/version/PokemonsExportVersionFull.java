@@ -44,7 +44,7 @@ public class PokemonsExportVersionFull extends PokemonsExportVersion {
         return rows;
     }
 
-    private String getTypesOfPokemon(PokemonEntity pokemonEntity) {
+    String getTypesOfPokemon(PokemonEntity pokemonEntity) {
         List<EstTypeEntity> estTypeEntityList = this.estTypeEntities.stream()
                 .filter(estTypeEntity -> estTypeEntity.getIdPokemon().equals(pokemonEntity.getId()))
                 .collect(Collectors.toList());

@@ -38,7 +38,7 @@ public class Search {
      * @param exp        expression recherchée
      * @return score de la recherche
      */
-    private static int getScore(String entityName, String exp) {
+    static int getScore(String entityName, String exp) {
         int maxScore = NOT_FOUND;
 
         if (StringUtils.isBlank(entityName) || StringUtils.isBlank(exp)) {
@@ -61,7 +61,7 @@ public class Search {
      * @param score      score accumulé
      * @return score calculé ajouté au score accumulé
      */
-    private static int getScoreString(String entityName, String exp, int score) {
+    static int getScoreString(String entityName, String exp, int score) {
         if ((StringUtils.isBlank(entityName) || StringUtils.isBlank(exp)) && score == 0) {
             return NOT_FOUND;
         }
@@ -88,7 +88,7 @@ public class Search {
      * @param expLetter        caractère de l'expression recherchée
      * @return score calculé
      */
-    private static int getScoreLetter(char entityNameLetter, char expLetter) {
+    static int getScoreLetter(char entityNameLetter, char expLetter) {
         if (Character.isWhitespace(expLetter) || Character.isWhitespace(entityNameLetter)) {
             return -1;
         } else if (expLetter == entityNameLetter) {
@@ -128,7 +128,7 @@ public class Search {
      * @param lastScoreLetter dernier score
      * @return booléen représentant la présence d'un espace
      */
-    private static Boolean currentCharEqualsSpace(char charToTest, int lastScoreLetter) {
+    static Boolean currentCharEqualsSpace(char charToTest, int lastScoreLetter) {
         return lastScoreLetter == -1 && Character.isWhitespace(charToTest);
     }
 }
