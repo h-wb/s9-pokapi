@@ -26,12 +26,18 @@ scrape_configs:
       - targets: ['groupe3.m2gi.win']
 
   - job_name: 'spring-actuator'
+    basic_auth:
+      username: 'admin'
+      password: 'admin'
     metrics_path: '/actuator/prometheus'
     scrape_interval: 5s
     static_configs:
       - targets: ['groupe3_groupe3:9091']
 
   - job_name: 'spring-actuator-https'
+    basic_auth:
+      username: 'admin'
+      password: 'admin'
     scheme: https
     metrics_path: '/app/actuator/prometheus'
     scrape_interval: 5s

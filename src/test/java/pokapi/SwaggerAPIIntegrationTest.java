@@ -1,5 +1,10 @@
 package pokapi;
 
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.MockMvcBuilder;
+import org.springframework.web.servlet.DispatcherServlet;
 import pokapi.configuration.SwaggerConfig;
 import pokapi.repository.EstTypeRepository;
 import pokapi.repository.PokemonRepository;
@@ -36,7 +41,9 @@ public class SwaggerAPIIntegrationTest {
     @MockBean
     private EstTypeRepository estTypeRepository;
 
+
     @Test
+    @WithMockUser(username = "admin", password = "admin", roles = "USER")
     public void swaggerJsonExists() throws Exception {
         String contentAsString = mockMvc
                 .perform(MockMvcRequestBuilders.get("/v2/api-docs")
