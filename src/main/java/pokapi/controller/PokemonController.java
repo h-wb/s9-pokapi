@@ -97,7 +97,7 @@ public class PokemonController {
     @ApiOperation(value = "Modifier un pokémon par id")
     @PutMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Object> updatePokemon(@PathVariable final long Id, @Valid @RequestBody PokemonDTO pokemonDTO) throws ResourceNotFoundException {
+    public ResponseEntity<PokemonEntity> updatePokemon(@PathVariable final long Id, @Valid @RequestBody PokemonDTO pokemonDTO) throws ResourceNotFoundException {
         PokemonEntity pokemonEntity = pokemonRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException(ERROR_POKEMON_ID_NOT_FOUND + Id));
 
