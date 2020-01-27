@@ -1,6 +1,5 @@
 package pokapi.controller;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -21,9 +20,7 @@ import pokapi.repository.EstTypeRepository;
 import pokapi.repository.PokemonRepository;
 import pokapi.repository.TypeRepository;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

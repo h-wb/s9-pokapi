@@ -90,7 +90,7 @@ public class EstTypeController {
     @ApiOperation(value = "Modifier un lien entre un Pokémon et un type par id")
     @PutMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Object> updateLienEstType(@PathVariable final Long Id, @Valid @RequestBody EstTypeDTO estTypeDTO) throws ResourceNotFoundException {
+    public ResponseEntity<EstTypeEntity> updateLienEstType(@PathVariable final Long Id, @Valid @RequestBody EstTypeDTO estTypeDTO) throws ResourceNotFoundException {
         EstTypeEntity estTypeEntity = estTypeRepository.findById(Id)
                 .orElseThrow(() -> new ResourceNotFoundException(ERROR_ESTTYPE_ID_NOT_FOUND + Id));
 

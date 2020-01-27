@@ -8,10 +8,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 import pokapi.dto.TypeDTO;
-import pokapi.dto.TypeDTO;
-import pokapi.entity.*;
-import pokapi.entity.TypeEntity;
-import pokapi.entity.TypeEntity;
 import pokapi.entity.TypeEntity;
 import pokapi.exception.ResourceNotFoundException;
 import pokapi.repository.TypeRepository;
@@ -21,9 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public class TypeControllerTest {
 
