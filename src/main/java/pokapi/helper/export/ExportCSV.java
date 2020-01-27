@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ExportCSV {
+    private ExportCSV() {
+    }
 
     public static ByteArrayInputStream export(PokemonsExportVersion pokemonsExportVersion) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();

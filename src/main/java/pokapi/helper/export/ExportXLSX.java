@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class ExportXLSX {
+    private ExportXLSX() {
+    }
 
     public static ByteArrayInputStream export(PokemonsExportVersion pokemonsExportVersion) throws IOException {
         try (Workbook workbook = new XSSFWorkbook()) {

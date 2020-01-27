@@ -45,14 +45,14 @@ public class PokemonsExportVersionFull extends PokemonsExportVersion {
     }
 
     private String getTypesOfPokemon(PokemonEntity pokemonEntity) {
-        List<EstTypeEntity> estTypeEntities = this.estTypeEntities.stream()
+        List<EstTypeEntity> estTypeEntityList = this.estTypeEntities.stream()
                 .filter(estTypeEntity -> estTypeEntity.getIdPokemon().equals(pokemonEntity.getId()))
                 .collect(Collectors.toList());
 
-        List<TypeEntity> typeEntities = this.typeEntities.stream()
-                .filter(typeEntity -> estTypeEntities.stream().map(EstType::getIdType).collect(Collectors.toList()).contains(typeEntity.getId()))
+        List<TypeEntity> typeEntityList = this.typeEntities.stream()
+                .filter(typeEntity -> estTypeEntityList.stream().map(EstType::getIdType).collect(Collectors.toList()).contains(typeEntity.getId()))
                 .collect(Collectors.toList());
 
-        return typeEntities.stream().map(Type::getName).collect(Collectors.joining(" - "));
+        return typeEntityList.stream().map(Type::getName).collect(Collectors.joining(" - "));
     }
 }
