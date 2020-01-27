@@ -13,6 +13,7 @@ import pokapi.entity.EstTypeEntity;
 import pokapi.entity.PokemonEntity;
 import pokapi.entity.TypeEntity;
 import pokapi.exception.ResourceNotFoundException;
+import pokapi.helper.export.ExportCSV;
 import pokapi.helper.export.ExportXLSX;
 import pokapi.helper.export.version.PokemonsExportVersion;
 import pokapi.helper.export.version.PokemonsExportVersionFull;
@@ -121,7 +122,14 @@ public class PokemonControllerTest {
 
         Map<String, Boolean> returned = pokemonController.deletePokemonById(1L);
 
+        try {
+            pokemonController.deletePokemonById(2L);
+        } catch (ResourceNotFoundException e) {
+            assert (e.getMessage().contains("Pokemon not found"));
+        }
+
         verify(pokemonRepository, times(1)).findById(1L);
+        verify(pokemonRepository, times(1)).findById(2L);
         verify(pokemonRepository, times(1)).delete(pokemonEntity);
 
         verifyNoMoreInteractions(pokemonRepository);
@@ -191,19 +199,25 @@ public class PokemonControllerTest {
 
         ResponseEntity<InputStreamResource> returned = pokemonController.exportPokemons(extension, "full", "bulb");
         ResponseEntity<InputStreamResource> returnedBad = pokemonController.exportPokemons(extension, "full", "test");
+        ResponseEntity<InputStreamResource> returnedCsv = pokemonController.exportPokemons("csv", "light", "test");
+        ResponseEntity<InputStreamResource> returnedEmptyExp = pokemonController.exportPokemons("csv", "light", "");
 
         PokemonsExportVersion exportVersion = new PokemonsExportVersionFull(extension, pokemonEntities, typeEntities, estTypeEntities);
         InputStreamResource expected1 = new InputStreamResource(ExportXLSX.export(exportVersion));
         InputStreamResource expected2 = new InputStreamResource(ExportXLSX.export(exportVersion));
+        InputStreamResource expectedCsv = new InputStreamResource(ExportCSV.export(exportVersion));
+        InputStreamResource expectedEmptyExp = new InputStreamResource(ExportCSV.export(exportVersion));
 
-        verify(pokemonRepository, times(2)).findAll();
-        verify(typeRepository, times(2)).findAll();
-        verify(estTypeRepository, times(2)).findAll();
+        verify(pokemonRepository, times(4)).findAll();
+        verify(typeRepository, times(4)).findAll();
+        verify(estTypeRepository, times(4)).findAll();
         verifyNoMoreInteractions(pokemonRepository);
         verifyNoMoreInteractions(typeRepository);
         verifyNoMoreInteractions(estTypeRepository);
 
         assertEquals(expected1.contentLength(), Objects.requireNonNull(returned.getBody()).contentLength());
         assertNotEquals(expected2.contentLength(), Objects.requireNonNull(returnedBad.getBody()).contentLength());
+        assertNotEquals(expectedCsv.contentLength(), Objects.requireNonNull(returnedCsv.getBody()).contentLength());
+        assertNotEquals(expectedEmptyExp.contentLength(), Objects.requireNonNull(returnedEmptyExp.getBody()).contentLength());
     }
 }

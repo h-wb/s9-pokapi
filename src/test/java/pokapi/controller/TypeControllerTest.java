@@ -93,7 +93,14 @@ public class TypeControllerTest {
 
         Map<String, Boolean> returned = typeController.deleteTypeById(1L);
 
+        try {
+            typeController.deleteTypeById(2L);
+        } catch (ResourceNotFoundException e) {
+            assert (e.getMessage().contains("Type not found"));
+        }
+
         verify(typeRepository, times(1)).findById(1L);
+        verify(typeRepository, times(1)).findById(2L);
         verify(typeRepository, times(1)).delete(typeEntity);
 
         verifyNoMoreInteractions(typeRepository);

@@ -70,7 +70,7 @@ public class EstTypeControllerTest {
 
         when(estTypeRepository.findAll()).thenReturn(estTypeEntities);
 
-        List<EstTypeEntity> returned = estTypeController.getAllLiensEstTypeByPokemon(1L);
+        List<EstTypeEntity> returned = estTypeController.getAllLiensEstTypeByType(1L);
 
         verify(estTypeRepository, times(1)).findAll();
 
@@ -124,7 +124,14 @@ public class EstTypeControllerTest {
 
         Map<String, Boolean> returned = estTypeController.deleteLienEstType(1L);
 
+        try {
+            estTypeController.deleteLienEstType(2L);
+        } catch (ResourceNotFoundException e) {
+            assert (e.getMessage().contains("EstType not found"));
+        }
+
         verify(estTypeRepository, times(1)).findById(1L);
+        verify(estTypeRepository, times(1)).findById(2L);
         verify(estTypeRepository, times(1)).delete(estTypeEntity);
 
         verifyNoMoreInteractions(estTypeRepository);
