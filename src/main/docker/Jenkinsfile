@@ -33,7 +33,7 @@ node {
 
         stage('backend tests') {
             try {
-                sh "./mvnw test -P-set-hooks"
+                sh "./mvnw test -P-set-hooks,-dev"
             } catch (err) {
                 throw err
             } finally {
