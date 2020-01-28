@@ -1,0 +1,75 @@
+#!/usr/bin/env groovy
+properties([buildDiscarder(logRotator(artifactNumToKeepStr: '5', numToKeepStr: '5'))])
+
+
+node {
+
+    def commitId
+    def nomDeLimage = 'groupe3'
+
+    stage('checkout') {
+        git branch: "$BRANCH", url: "$GITHUB_URL"
+        commitId = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+    }
+
+    // si jenkins est dans un docker, il faut rajouter -u root
+    docker.image('openjdk:8').inside('-u root -e MAVEN_OPTS="-Duser.home=./"') {
+
+       stage('check tools') {
+            parallel(
+                    java: {
+                        sh "java -version"
+                    },
+                    maven: {
+                        sh "chmod +x mvnw"
+                        sh "./mvnw -version"
+                    }
+            )
+        }
+
+      stage('clean') {
+            sh "./mvnw clean"
+        }
+
+        stage('backend tests') {
+            try {
+                sh "./mvnw test -Pcoverage -P-set-hooks,-dev"
+            } catch (err) {
+                throw err
+            } finally {
+                junit '**/target/surefire-reports/TEST-*.xml'
+            }
+        }
+
+        stage('packaging') {
+            sh "./mvnw verify -DskipTests -Pdev -P-set-hooks"
+            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+        }
+
+        stage('Analyse SonarQube') {
+            withSonarQubeEnv('sonarqube') {
+                sh "./mvnw sonar:sonar"
+            }
+        }
+
+        stage('preparing docker') {
+            sh "cp -R src/main/docker/* target/"
+        }
+    }
+
+
+    stage('build docker') {
+        try {
+            def dockerImage = docker.build("m2gi/${nomDeLimage}:${commitId}", 'target')
+        } catch (err) {
+            throw err
+        } finally {
+            sh "docker tag m2gi/${nomDeLimage}:${commitId} m2gi/${nomDeLimage}:latest"
+        }
+    }
+
+    stage('redeploy'){
+        sh "sed -i -E 's=m2gi/${nomDeLimage}:latest?=m2gi/${nomDeLimage}:${commitId}=g' src/main/docker/app.yml"
+        sh "docker stack deploy -c src/main/docker/app.yml ${nomDeLimage}"
+    }
+}

@@ -2,10 +2,10 @@
 <a name="paths"></a>
 ## Paths
 
-<a name="indexusingpost"></a>
-### index
+<a name="getallliensesttypeusingget"></a>
+### Récupérer tous les liens entre les Pokémons et les types
 ```
-POST /
+GET /api/esttype/all
 ```
 
 
@@ -13,385 +13,26 @@ POST /
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|string|
+|**200**|OK|< [EstTypeEntity](#esttypeentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
-#### Consumes
+#### Produces
 
 * `application/json`
 
 
-#### Produces
-
-* `*/*`
-
-
 #### Tags
 
-* main-controller
+* estType
 
 
-<a name="indexusingget"></a>
-### index
+<a name="getallliensesttypebypokemonusingget"></a>
+### Récupérer tous les liens entre un Pokémon et ses types par l'id du Pokémon
 ```
-GET /
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|string|
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* main-controller
-
-
-<a name="indexusingput"></a>
-### index
-```
-PUT /
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|string|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* main-controller
-
-
-<a name="indexusingdelete"></a>
-### index
-```
-DELETE /
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|string|
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* main-controller
-
-
-<a name="indexusingpatch"></a>
-### index
-```
-PATCH /
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|string|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* main-controller
-
-
-<a name="indexusinghead"></a>
-### index
-```
-HEAD /
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|string|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* main-controller
-
-
-<a name="indexusingoptions"></a>
-### index
-```
-OPTIONS /
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|string|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* main-controller
-
-
-<a name="errorhtmlusingpost"></a>
-### errorHtml
-```
-POST /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingget"></a>
-### errorHtml
-```
-GET /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingput"></a>
-### errorHtml
-```
-PUT /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingdelete"></a>
-### errorHtml
-```
-DELETE /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingpatch"></a>
-### errorHtml
-```
-PATCH /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusinghead"></a>
-### errorHtml
-```
-HEAD /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingoptions"></a>
-### errorHtml
-```
-OPTIONS /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="createpokemonusingpost"></a>
-### createPokemon
-```
-POST /pokemons
+GET /api/esttype/all/pokemon/{Id}
 ```
 
 
@@ -399,14 +40,86 @@ POST /pokemons
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Body**|**pokemon**  <br>*required*|pokemon|[Pokemon](#pokemon)|
+|**Path**|**Id**  <br>*required*|Id|integer (int64)|
 
 
 #### Responses
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|[Pokemon](#pokemon)|
+|**200**|OK|< [EstTypeEntity](#esttypeentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* estType
+
+
+<a name="getallliensesttypebytypeusingget"></a>
+### Récupérer tous les liens entre les Pokémons et un type par l'id du type
+```
+GET /api/esttype/all/type/{Id}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**Id**  <br>*required*|Id|integer (int64)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [EstTypeEntity](#esttypeentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* estType
+
+
+<a name="createlienesttypeusingpost"></a>
+### Créer un lien entre un Pokémon et un type
+```
+POST /api/esttype/new
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Body**|**estTypeDTO**  <br>*required*|estTypeDTO|[EstTypeDTO](#esttypedto)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[EstTypeEntity](#esttypeentity)|
+|**201**|Created|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Consumes
@@ -416,18 +129,127 @@ POST /pokemons
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
 
-* pokemon-controller
+* estType
+
+
+<a name="getlienesttypebyidusingget"></a>
+### Récupérer un lien entre un Pokémon et un type par id
+```
+GET /api/esttype/{Id}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**Id**  <br>*required*|Id|integer (int64)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[EstTypeEntity](#esttypeentity)|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* estType
+
+
+<a name="updatelienesttypeusingput"></a>
+### Modifier un lien entre un Pokémon et un type par id
+```
+PUT /api/esttype/{Id}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**Id**  <br>*required*|Id|integer (int64)|
+|**Body**|**estTypeDTO**  <br>*required*|estTypeDTO|[EstTypeDTO](#esttypedto)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[EstTypeEntity](#esttypeentity)|
+|**201**|Created|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* estType
+
+
+<a name="deletelienesttypeusingdelete"></a>
+### Supprimer un lien entre un Pokémon et un type par id
+```
+DELETE /api/esttype/{Id}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**Id**  <br>*required*|Id|integer (int64)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< string, boolean > map|
+|**204**|No Content|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* estType
 
 
 <a name="getallpokemonsusingget"></a>
-### getAllPokemons
+### Récuperer tous les pokémons
 ```
-GET /pokemons
+GET /api/pokemon/all
 ```
 
 
@@ -435,7 +257,46 @@ GET /pokemons
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|< [Pokemon](#pokemon) > array|
+|**200**|OK|< [PokemonEntity](#pokemonentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* pokemon
+
+
+<a name="exportpokemonsusingget"></a>
+### Exporter des Pokémons par nom
+```
+GET /api/pokemon/export/
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Query**|**Extension**  <br>*required*|Format du fichier|enum (xlsx, csv)|
+|**Query**|**Name**  <br>*optional*|Name|string|
+|**Query**|**Version**  <br>*required*|Version à exporter|enum (full, light)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[InputStreamResource](#inputstreamresource)|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
@@ -445,13 +306,121 @@ GET /pokemons
 
 #### Tags
 
-* pokemon-controller
+* pokemon
+
+
+<a name="createpokemonusingpost"></a>
+### Créer un pokémon
+```
+POST /api/pokemon/new
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Body**|**pokemonDTO**  <br>*required*|pokemonDTO|[PokemonDTO](#pokemondto)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[PokemonEntity](#pokemonentity)|
+|**201**|Created|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* pokemon
+
+
+<a name="getallpokemonsbypokedexidusingget"></a>
+### Récuperer les pokémons par id Pokédex
+```
+GET /api/pokemon/pokedex/{IdPokedex}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**IdPokedex**  <br>*required*|IdPokedex|integer (int64)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [PokemonEntity](#pokemonentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* pokemon
+
+
+<a name="searchpokemonusingget"></a>
+### Chercher un Pokémon par nom
+```
+GET /api/pokemon/search/
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Query**|**Name**  <br>*optional*|Name|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [PokemonEntity](#pokemonentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* pokemon
 
 
 <a name="getpokemonbyidusingget"></a>
-### getPokemonById
+### Récupérer un pokémon par id
 ```
-GET /pokemons/{Id}
+GET /api/pokemon/{Id}
 ```
 
 
@@ -466,23 +435,26 @@ GET /pokemons/{Id}
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|[Pokemon](#pokemon)|
+|**200**|OK|[PokemonEntity](#pokemonentity)|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
 
-* pokemon-controller
+* pokemon
 
 
 <a name="updatepokemonusingput"></a>
-### updatePokemon
+### Modifier un pokémon par id
 ```
-PUT /pokemons/{Id}
+PUT /api/pokemon/{Id}
 ```
 
 
@@ -491,14 +463,18 @@ PUT /pokemons/{Id}
 |Type|Name|Description|Schema|
 |---|---|---|---|
 |**Path**|**Id**  <br>*required*|Id|integer (int64)|
-|**Body**|**pokemonDetails**  <br>*required*|pokemonDetails|[Pokemon](#pokemon)|
+|**Body**|**pokemonDTO**  <br>*required*|pokemonDTO|[PokemonDTO](#pokemondto)|
 
 
 #### Responses
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|object|
+|**200**|OK|[PokemonEntity](#pokemonentity)|
+|**201**|Created|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Consumes
@@ -508,18 +484,18 @@ PUT /pokemons/{Id}
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
 
-* pokemon-controller
+* pokemon
 
 
 <a name="deletepokemonbyidusingdelete"></a>
-### deletePokemonById
+### Supprimer un pokémon par id
 ```
-DELETE /pokemons/{Id}
+DELETE /api/pokemon/{Id}
 ```
 
 
@@ -535,58 +511,25 @@ DELETE /pokemons/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< string, boolean > map|
+|**204**|No Content|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
 
 
 #### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* pokemon-controller
-
-
-<a name="createtypeusingpost"></a>
-### createType
-```
-POST /types
-```
-
-
-#### Parameters
-
-|Type|Name|Description|Schema|
-|---|---|---|---|
-|**Body**|**type**  <br>*required*|type|[Type](#type)|
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[Type](#type)|
-
-
-#### Consumes
 
 * `application/json`
 
 
-#### Produces
-
-* `*/*`
-
-
 #### Tags
 
-* type-controller
+* pokemon
 
 
 <a name="getalltypesusingget"></a>
-### getAllTypes
+### Récuperer tous les type de Pokémons
 ```
-GET /types
+GET /api/type/all
 ```
 
 
@@ -594,23 +537,26 @@ GET /types
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|[Iterable«Type»](#9c3627461f0d3a843a0e61623d3d6b8d)|
+|**200**|OK|< [TypeEntity](#typeentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
 
-* type-controller
+* type
 
 
-<a name="gettypebyidusingget"></a>
-### getTypeById
+<a name="createtypeusingpost"></a>
+### Créer un type de Pokémon
 ```
-GET /types/{Id}
+POST /api/type/new
 ```
 
 
@@ -618,46 +564,18 @@ GET /types/{Id}
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Path**|**Id**  <br>*required*|Id|integer (int64)|
+|**Body**|**typeDTO**  <br>*required*|typeDTO|[TypeDTO](#typedto)|
 
 
 #### Responses
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|[Type](#type)|
-
-
-#### Produces
-
-* `*/*`
-
-
-#### Tags
-
-* type-controller
-
-
-<a name="updatetypeusingput"></a>
-### updateType
-```
-PUT /types/{Id}
-```
-
-
-#### Parameters
-
-|Type|Name|Description|Schema|
-|---|---|---|---|
-|**Path**|**Id**  <br>*required*|Id|integer (int64)|
-|**Body**|**typeDetails**  <br>*required*|typeDetails|[Type](#type)|
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|object|
+|**200**|OK|[TypeEntity](#typeentity)|
+|**201**|Created|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
 
 
 #### Consumes
@@ -667,18 +585,127 @@ PUT /types/{Id}
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
 
-* type-controller
+* type
+
+
+<a name="searchtypeusingget"></a>
+### Chercher un type de Pokémon par nom
+```
+GET /api/type/search/
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Query**|**Name**  <br>*required*|Name|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [TypeEntity](#typeentity) > array|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* type
+
+
+<a name="gettypebyidusingget"></a>
+### Récupérer un type de Pokémon par id
+```
+GET /api/type/{Id}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**Id**  <br>*required*|Id|integer (int64)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[TypeEntity](#typeentity)|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* type
+
+
+<a name="updatetypeusingput"></a>
+### Modifier un type de Pokémon par id
+```
+PUT /api/type/{Id}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**Id**  <br>*required*|Id|integer (int64)|
+|**Body**|**typeDTO**  <br>*required*|typeDTO|[TypeDTO](#typedto)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[TypeEntity](#typeentity)|
+|**201**|Created|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* type
 
 
 <a name="deletetypebyidusingdelete"></a>
-### deleteTypeById
+### Supprimer un type de Pokémon par id
 ```
-DELETE /types/{Id}
+DELETE /api/type/{Id}
 ```
 
 
@@ -694,16 +721,19 @@ DELETE /types/{Id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< string, boolean > map|
+|**204**|No Content|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
 
 
 #### Produces
 
-* `*/*`
+* `application/json`
 
 
 #### Tags
 
-* type-controller
+* type
 
 
 

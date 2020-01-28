@@ -2,50 +2,152 @@
 <a name="definitions"></a>
 ## Definitions
 
-<a name="9c3627461f0d3a843a0e61623d3d6b8d"></a>
-### Iterable«Type»
+<a name="esttypedto"></a>
+### EstTypeDTO
+Classe représentant le lien entre un Pokémon et un type
+
+
+|Name|Description|Schema|
+|---|---|---|
+|**idPokemon**  <br>*optional*|Identifiant du Pokémon  <br>**Example** : `1`|integer (int64)|
+|**idType**  <br>*optional*|Identifiant du type  <br>**Example** : `1`|integer (int64)|
+
+
+<a name="esttypeentity"></a>
+### EstTypeEntity
+Classe représentant le lien entre un Pokémon et un type
+
+
+|Name|Description|Schema|
+|---|---|---|
+|**idPokemon**  <br>*optional*|Identifiant du Pokémon  <br>**Example** : `1`|integer (int64)|
+|**idType**  <br>*optional*|Identifiant du type  <br>**Example** : `1`|integer (int64)|
+
+
+<a name="file"></a>
+### File
+
+|Name|Schema|
+|---|---|
+|**absolute**  <br>*optional*|boolean|
+|**absoluteFile**  <br>*optional*|[File](#file)|
+|**absolutePath**  <br>*optional*|string|
+|**canonicalFile**  <br>*optional*|[File](#file)|
+|**canonicalPath**  <br>*optional*|string|
+|**directory**  <br>*optional*|boolean|
+|**file**  <br>*optional*|boolean|
+|**freeSpace**  <br>*optional*|integer (int64)|
+|**hidden**  <br>*optional*|boolean|
+|**name**  <br>*optional*|string|
+|**parent**  <br>*optional*|string|
+|**parentFile**  <br>*optional*|[File](#file)|
+|**path**  <br>*optional*|string|
+|**totalSpace**  <br>*optional*|integer (int64)|
+|**usableSpace**  <br>*optional*|integer (int64)|
+
+
+<a name="inputstream"></a>
+### InputStream
 *Type* : object
 
 
-<a name="modelandview"></a>
-### ModelAndView
+<a name="inputstreamresource"></a>
+### InputStreamResource
 
 |Name|Schema|
 |---|---|
-|**empty**  <br>*optional*|boolean|
-|**model**  <br>*optional*|object|
-|**modelMap**  <br>*optional*|< string, object > map|
-|**reference**  <br>*optional*|boolean|
-|**status**  <br>*optional*|enum (100 CONTINUE, 101 SWITCHING_PROTOCOLS, 102 PROCESSING, 103 CHECKPOINT, 200 OK, 201 CREATED, 202 ACCEPTED, 203 NON_AUTHORITATIVE_INFORMATION, 204 NO_CONTENT, 205 RESET_CONTENT, 206 PARTIAL_CONTENT, 207 MULTI_STATUS, 208 ALREADY_REPORTED, 226 IM_USED, 300 MULTIPLE_CHOICES, 301 MOVED_PERMANENTLY, 302 FOUND, 302 MOVED_TEMPORARILY, 303 SEE_OTHER, 304 NOT_MODIFIED, 305 USE_PROXY, 307 TEMPORARY_REDIRECT, 308 PERMANENT_REDIRECT, 400 BAD_REQUEST, 401 UNAUTHORIZED, 402 PAYMENT_REQUIRED, 403 FORBIDDEN, 404 NOT_FOUND, 405 METHOD_NOT_ALLOWED, 406 NOT_ACCEPTABLE, 407 PROXY_AUTHENTICATION_REQUIRED, 408 REQUEST_TIMEOUT, 409 CONFLICT, 410 GONE, 411 LENGTH_REQUIRED, 412 PRECONDITION_FAILED, 413 PAYLOAD_TOO_LARGE, 413 REQUEST_ENTITY_TOO_LARGE, 414 URI_TOO_LONG, 414 REQUEST_URI_TOO_LONG, 415 UNSUPPORTED_MEDIA_TYPE, 416 REQUESTED_RANGE_NOT_SATISFIABLE, 417 EXPECTATION_FAILED, 418 I_AM_A_TEAPOT, 419 INSUFFICIENT_SPACE_ON_RESOURCE, 420 METHOD_FAILURE, 421 DESTINATION_LOCKED, 422 UNPROCESSABLE_ENTITY, 423 LOCKED, 424 FAILED_DEPENDENCY, 426 UPGRADE_REQUIRED, 428 PRECONDITION_REQUIRED, 429 TOO_MANY_REQUESTS, 431 REQUEST_HEADER_FIELDS_TOO_LARGE, 451 UNAVAILABLE_FOR_LEGAL_REASONS, 500 INTERNAL_SERVER_ERROR, 501 NOT_IMPLEMENTED, 502 BAD_GATEWAY, 503 SERVICE_UNAVAILABLE, 504 GATEWAY_TIMEOUT, 505 HTTP_VERSION_NOT_SUPPORTED, 506 VARIANT_ALSO_NEGOTIATES, 507 INSUFFICIENT_STORAGE, 508 LOOP_DETECTED, 509 BANDWIDTH_LIMIT_EXCEEDED, 510 NOT_EXTENDED, 511 NETWORK_AUTHENTICATION_REQUIRED)|
-|**view**  <br>*optional*|[View](#view)|
-|**viewName**  <br>*optional*|string|
+|**description**  <br>*optional*|string|
+|**file**  <br>*optional*|[File](#file)|
+|**filename**  <br>*optional*|string|
+|**inputStream**  <br>*optional*|[InputStream](#inputstream)|
+|**open**  <br>*optional*|boolean|
+|**readable**  <br>*optional*|boolean|
+|**uri**  <br>*optional*|[URI](#uri)|
+|**url**  <br>*optional*|[URL](#url)|
 
 
-<a name="pokemon"></a>
-### Pokemon
+<a name="pokemondto"></a>
+### PokemonDTO
+Classe représentant un Pokémon
+
+
+|Name|Description|Schema|
+|---|---|---|
+|**idPokedex**  <br>*optional*|Numéro de Pokédex du pokémon  <br>**Example** : `1`|integer (int64)|
+|**name**  <br>*optional*|Nom du pokémon  <br>**Example** : `"Bulbizarre"`|string|
+
+
+<a name="pokemonentity"></a>
+### PokemonEntity
+Classe représentant un Pokémon
+
+
+|Name|Description|Schema|
+|---|---|---|
+|**idPokedex**  <br>*optional*|Numéro de Pokédex du pokémon  <br>**Example** : `1`|integer (int64)|
+|**name**  <br>*optional*|Nom du pokémon  <br>**Example** : `"Bulbizarre"`|string|
+
+
+<a name="typedto"></a>
+### TypeDTO
+Classe représentant un type de pokémon
+
+
+|Name|Description|Schema|
+|---|---|---|
+|**name**  <br>*optional*|Nom du type  <br>**Example** : `"Feu"`|string|
+
+
+<a name="typeentity"></a>
+### TypeEntity
+Classe représentant un type de pokémon
+
+
+|Name|Description|Schema|
+|---|---|---|
+|**name**  <br>*optional*|Nom du type  <br>**Example** : `"Feu"`|string|
+
+
+<a name="uri"></a>
+### URI
 
 |Name|Schema|
 |---|---|
-|**id**  <br>*optional*|integer (int64)|
-|**idPokedex**  <br>*optional*|integer (int64)|
-|**name**  <br>*optional*|string|
+|**absolute**  <br>*optional*|boolean|
+|**authority**  <br>*optional*|string|
+|**fragment**  <br>*optional*|string|
+|**host**  <br>*optional*|string|
+|**opaque**  <br>*optional*|boolean|
+|**path**  <br>*optional*|string|
+|**port**  <br>*optional*|integer (int32)|
+|**query**  <br>*optional*|string|
+|**rawAuthority**  <br>*optional*|string|
+|**rawFragment**  <br>*optional*|string|
+|**rawPath**  <br>*optional*|string|
+|**rawQuery**  <br>*optional*|string|
+|**rawSchemeSpecificPart**  <br>*optional*|string|
+|**rawUserInfo**  <br>*optional*|string|
+|**scheme**  <br>*optional*|string|
+|**schemeSpecificPart**  <br>*optional*|string|
+|**userInfo**  <br>*optional*|string|
 
 
-<a name="type"></a>
-### Type
+<a name="url"></a>
+### URL
 
 |Name|Schema|
 |---|---|
-|**id**  <br>*optional*|integer (int64)|
-|**name**  <br>*optional*|string|
-
-
-<a name="view"></a>
-### View
-
-|Name|Schema|
-|---|---|
-|**contentType**  <br>*optional*|string|
+|**authority**  <br>*optional*|string|
+|**content**  <br>*optional*|object|
+|**defaultPort**  <br>*optional*|integer (int32)|
+|**file**  <br>*optional*|string|
+|**host**  <br>*optional*|string|
+|**path**  <br>*optional*|string|
+|**port**  <br>*optional*|integer (int32)|
+|**protocol**  <br>*optional*|string|
+|**query**  <br>*optional*|string|
+|**ref**  <br>*optional*|string|
+|**userInfo**  <br>*optional*|string|
 
 
 

@@ -1,13 +1,9 @@
-# User API
+# Pokapi
 
 
 <a name="overview"></a>
 ## Overview
-API for fetching user related information
-
-
-### Version information
-*Version* : 1.0.0
+API Pokemon créée dans le cadre du M2 GI
 
 
 ### URI scheme
@@ -17,10 +13,9 @@ API for fetching user related information
 
 ### Tags
 
-* basic-error-controller : Basic Error Controller
-* main-controller : Main Controller
-* pokemon-controller : Pokemon Controller
-* type-controller : Type Controller
+* estType : Est Type Controller
+* pokemon : Pokemon Controller
+* type : Type Controller
 
 
 

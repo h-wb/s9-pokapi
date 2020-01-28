@@ -1,11 +1,17 @@
 version: '3.5'
 services:
   groupe3:
-    image: m2gi/groupe3:0.0.1-SNAPSHOT
+    image: m2gi/groupe3:latest
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m -XX:+UseSerialGC -Xss512k
+    ports:
+      - 9091:8080
     networks:
-      #network pour traefik
       - 'traefik-public'
     deploy:
+      placement:
+        constraints:
+          - node.labels.target == fac
       replicas: 1
       update_config:
         parallelism: 1
@@ -18,15 +24,81 @@ services:
         - traefik.port=8080
         - traefik.tags=traefik-public
         - traefik.docker.network=traefik-public
-        # Traefik service that listens to HTTP
         - traefik.redirectorservice.frontend.entryPoints=http
         - traefik.redirectorservice.frontend.redirect.entryPoint=https
-        # Traefik service that listens to HTTPS
         - traefik.webservice.frontend.entryPoints=https
     depends_on:
       - traefik
 
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - 9090:9090
+    configs:
+      - source: prometheus_conf9
+        target: /etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    networks:
+      - 'traefik-public'
+    deploy:
+      placement:
+        constraints:
+          - node.labels.target == fac
+      replicas: 1
+      update_config:
+        parallelism: 1
+        order: start-first
+      restart_policy:
+        max_attempts: 5
+      labels:
+        - traefik.backend=prometheus
+        - traefik.frontend.rule=Host:groupe3.m2gi.win;PathPrefixStrip:/prom
+        - traefik.enable=true
+        - traefik.port=9090
+        - traefik.tags=traefik-public
+        - traefik.docker.network=traefik-public
+        - traefik.redirectorservice.frontend.entryPoints=http
+        - traefik.redirectorservice.frontend.redirect.entryPoint=https
+        - traefik.webservice.frontend.entryPoints=https
+    depends_on:
+      - traefik
 
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 9092:3000
+    networks:
+      - 'traefik-public'
+    deploy:
+      placement:
+        constraints:
+          - node.labels.target == fac
+      replicas: 1
+      update_config:
+        parallelism: 1
+        order: start-first
+      restart_policy:
+        max_attempts: 5
+      labels:
+        - traefik.backend=grafana
+        - traefik.frontend.rule=Host:groupe3.m2gi.win
+        - traefik.frontend.redirect.regex=^(.*)/grafana
+        - traefik.frontend.redirect.replacement=$$1/grafana/
+        - traefik.frontend.rule=PathPrefix:/grafana;ReplacePathRegex:^/grafana/(.*) /$$1
+        - traefik.enable=true
+        - traefik.port=3000
+        - traefik.tags=traefik-public
+        - traefik.docker.network=traefik-public
+        - traefik.redirectorservice.frontend.entryPoints=http
+        - traefik.redirectorservice.frontend.redirect.entryPoint=https
+        - traefik.webservice.frontend.entryPoints=https
+    depends_on:
+      - traefik
+
+configs:
+  prometheus_conf9:
+    file: /var/jenkins_home/workspace/g3-psw/src/main/docker/prometheus.yml
 networks:
   traefik-public:
     external: true

@@ -4,7 +4,7 @@ const sidebars = {
             title: 'Guide',
             collapsable: false,
             children: [
-                '/guide/test'
+                '/guide/nouveau_dev'
             ]
         },
     ],
@@ -35,26 +35,33 @@ const sidebars = {
 }
 
 module.exports = {
-    base: '/api-psw/',
-    title: 'VuePress in Github Pages',
-    description: 'Static website built with VuePress and deployed on Github Pages',
+    configureWebpack: {
+        resolve: {
+            alias: {
+                '@resources': '../resources'
+            }
+        }
+    },
+    base: '/Pokapi/',
+    title: 'Pokapi',
+    description: 'API Pokemon créée dans le cadre du M2 GI',
 
     themeConfig: {
-        repo: 'h-wb/api-psw',
+        repo: 'h-wb/Pokapi',
         docsDir: 'docs',
         sidebarDepth: 2,
 
         nav: [{
             text: 'Guide',
-            link: '/guide/test'
+            link: '/guide/nouveau_dev'
         },
             {
-                text: 'API Reference',
+                text: 'API',
                 link: '/api/overview'
             },
             {
                 text: 'Release Notes',
-                link: 'https://github.com/h-wb/api-psw/releases'
+                link: 'https://github.com/h-wb/Pokapi/releases'
             }
         ],
 

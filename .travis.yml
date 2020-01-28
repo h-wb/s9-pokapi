@@ -1,15 +1,13 @@
-language: node_js
-node_js:
-  - lts/*
-install:
-  - npm install # npm ci
-script:
-  - npm run build # npm run docs:build
-deploy:
-  provider: pages
-  skip_cleanup: true
-  local_dir: docs/.vuepress/dist
-  github_token: $TOKEN # A token generated on GitHub allowing Travis to push code on you repository. Set in the Travis settings page of your repository, as a secure variable
-  keep_history: true
-  on:
-    branch: master
+language: java
+script: mvn clean verify sonar:sonar -Pdev -Pdeploy -Pcoverage -P-set-hooks -Dsonar.projectKey=h-wb_Pokapi
+install: true
+addons:
+  sonarcloud:
+    organization: "h-wb"
+    token:
+      secure: "ABaUzlHuzgaZw24FFp7uC0t5+VA56eQZv/2a7GP9Kl+8s5db/GR6V3293fZ2Q2xCUSil8idx5osHlAhze1XgUJRKh1ENhtQzVmvXozyiM9lZKQOsQ5B2ls32ZXemxQ1ZbZ0rXvms49NYjHfVIFmEnazDi1OAagIhdcbEAdXYr5c+KJ0rXV5xYEw7o00aiLkInYFjH9fkVmzUK4ttcXiZgO86419cBaHLDUodcPXnEBOF6LPDu0kM8FedBzU74RWtUAgEomYUqCj33GMQRyFXVVUy0Kb/ZWBTDJDW410x+xCkbIbH/IubTeGhSo4EU3XjIkdMv8lfd8NzWwI7PEFG8WCbhzdV4nvMT7gCk9Efv9ChKet53CMH5HSHGeqRv2B3M2r1FEyxRsD4EQktH/+2TlKsFp1CwAQkueN19+hL3ZfYi0ghe320+STp5YIiBoxYKVSkc24j8udLV3KBQzHFuBmoEO0kXa7zlrT1afB+mPMHP58bTIguY7CJfvzSMTEKoqXI+fe9ZrqiwuUgUFte4oNalgHqHQeFtYtL3tqJND0dVOb+Ze9N3BHzXRxU3rYpfowPe7iiyGUNdWu5xn8xAeOFOvM71O2jfEWmp7xv6tmPZH9xZFYafmtlk30MHDmMMPXzt/kJyexNW6QY2wYxASvYE5MYh0UvW5tiTORwyjw="
+before_install:
+  - chmod +x mvnw
+  - chmod +x docs/deploy.sh
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
