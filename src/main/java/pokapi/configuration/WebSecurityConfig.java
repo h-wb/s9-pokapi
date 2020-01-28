@@ -29,6 +29,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/instances").permitAll()
                 .antMatchers("/admin/assets/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().permitAll();
+                .anyRequest().permitAll().and()
+                .requiresChannel().anyRequest().requiresInsecure();
     }
 }
