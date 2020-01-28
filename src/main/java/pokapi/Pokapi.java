@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableAdminServer
 public class Pokapi {
 
-	@SuppressWarnings("checkstyle:LineLength")
 	public static void main(String[] args) {
 		SpringApplication.run(Pokapi.class, args);
 
