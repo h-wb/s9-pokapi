@@ -10,7 +10,7 @@
     </parent>
     <groupId>gp</groupId>
     <artifactId>Pokapi</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>Pokapi</name>
     <description>API Pokemon créée dans le cadre du M2 GI</description>
 
