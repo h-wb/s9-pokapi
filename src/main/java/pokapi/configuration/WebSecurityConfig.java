@@ -12,24 +12,10 @@ import org.springframework.security.web.header.writers.frameoptions.XFrameOption
 @EnableWebSecurity
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("admin")
-                .password("{noop}admin")
-                .roles("ADMIN");
-    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .headers()
-                .addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)).and()
-                .formLogin().defaultSuccessUrl("/admin")
-                .loginPage("/admin/login").failureUrl("/admin/login?error").permitAll().and()
-                .logout().logoutSuccessUrl("/admin/login?logout").logoutUrl("/admin/logout").permitAll().and()
-                .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().permitAll();
+        http.csrf().disable();
     }
 }

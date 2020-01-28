@@ -96,6 +96,8 @@ Les versions finales sont mergées dans **master** et taguées.
 Les corrections critiques sont effectuées dans la branche **hotfix**.
 Elles sont mergées dans **develop** et sont mergées et taguées dans **master**.
 
+![sonarqube](./resources/git_flow.jpg)
+
 ### Vérification
 
 Après avoir écris du code, on vérifie qu'il n'y a pas de régression :
@@ -121,6 +123,8 @@ Votre console vous demandera alors de choisir un gitmoji (suivant [cette convent
 Puis on pushera sur la branche correspondante (feature, hotfix, ... en respectant le [GitFlow](#gitflow))
 
 Chaque commit sera notifié dans le channel #github du [Discord](https://discord.gg/9J8avy) pour permettre de prevenir les reviewers.
+
+![sonarqube](./resources/github.jpg)
 
 ### Pull Request
 
@@ -160,9 +164,18 @@ Elle est générée et déployée sur la branche *gh-pages* du repository automa
 
 ## PIC(s)
 
+### Travis
+
+Travis (**PIC de test**) lance un build de l'application à chaque nouvelle Pull Request. Il permet de vérifier que les tests fonctionnent ou non
+et d'en informer le développeur. Il est également responsable du déploiement de la documentation statique.
+ 
+ Il est utilisé car son intégration est très simple et efficace avec Github. 
+ 
+ Son interface est disponible [ici](https://travis-ci.com/h-wb/Pokapi).
+
 ### Jenkins 
 
-Jenkins lance un build de l'application à chaque nouveau commit. Il ne devrait à priori jamais avoir à lancer manuellement de job.
+Jenkins (**PIC de recette**) lance un build de l'application à chaque nouveau commit. Il ne devrait à priori jamais avoir à lancer manuellement de job.
 Cependant, si cela est nécessaire cela peut être fait via l'interface [Jenkins](https://jenkins.m2gi.win/).
 - Cliquez sur le projet **Pokapi**
 - Cliquez sur **Lancer un build**
