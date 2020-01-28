@@ -6,15 +6,12 @@
 
 <p align="center">
   <a href="https://travis-ci.org/vuex-orm/vuex-orm">
-    <img src="https://travis-ci.org/vuex-orm/vuex-orm.svg?branch=master" alt="Travis CI">
+    <img src="https://travis-ci.com/h-wb/Pokapi.svg?branch=master" alt="Travis CI">
   </a>
-  <a href="https://codecov.io/gh/vuex-orm/vuex-orm">
-    <img src="https://codecov.io/gh/vuex-orm/vuex-orm/branch/master/graph/badge.svg" alt="codecov">
-  </a>
-  <a href="https://standardjs.com">
-    <img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="JavaScript Style Guide">
-  </a>
-  <a href="https://github.com/vuex-orm/vuex-orm/blob/master/LICENSE.md">
+<a href="https://codecov.io/gh/h-wb/Pokapi">
+  <img src="https://codecov.io/gh/h-wb/Pokapi/branch/master/graph/badge.svg" />
+</a>
+  <a href="https://github.com/h-wb/Pokapi/blob/develop/LICENSE">
     <img src="https://img.shields.io/npm/l/@vuex-orm/core.svg" alt="License">
   </a>
 </p>
