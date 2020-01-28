@@ -71,4 +71,4 @@ Pour les nouveaux collaborateurs rejoignant l'équipe, il est indispensable de s
 
 ## License
 
-Pokapi est un projet open-source sous la [licence MIT](LICENSE.md)
+Pokapi est un projet open-source sous la [licence MIT](../LICENSE)
