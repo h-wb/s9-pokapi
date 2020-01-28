@@ -27,6 +27,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/admin/login?logout").logoutUrl("/admin/logout").permitAll().and()
                 .authorizeRequests()
                 .antMatchers("/admin/instances").permitAll()
+                .antMatchers("/admin/assets/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll();
     }
