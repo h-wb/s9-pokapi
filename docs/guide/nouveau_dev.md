@@ -149,7 +149,7 @@ Elles indiquent le résultat du build de la [PIC de test](#travis). Ici la [PIC 
 
 ### Post merge
 
-Après votre merge, vous pouvez vérifiez que tout va bien grâce aux outils de [supervision](#supervision) de la [PIC de recette](#jenkins) et que l'application est bien déployée ([https://groupe3.m2gi.win/app/swagger-ui.html](https://groupe3.m2gi.win/app/swagger-ui.html))
+Après votre merge, vous pouvez vérifiez que tout va bien grâce aux outils de [supervision](#supervision) de la [PIC de recette](#jenkins) et que l'application est bien déployée ([https://groupe3.m2gi.win/swagger-ui.html](https://groupe3.m2gi.win/app/swagger-ui.html))
 
 ## Documentation
 
@@ -222,7 +222,7 @@ pour l'application spring [ici](http://m2gi.win:9092/d/spring_boot_21/spring-boo
 
 ### Spring Boot Admin
 
-Spring Boot Admin permet également de récuperer les informations envoyées par prometheus. Elle est disponible [ici](https://groupe3.m2gi.win/app/admin) (Uniquement après connexion [ici](https://groupe3.m2gi.win/app/login), voir [Issue #25](https://github.com/h-wb/Pokapi/issues/25)).
+Spring Boot Admin permet également de récuperer les informations envoyées par prometheus. Elle est disponible [ici](https://groupe3.m2gi.win/admin).
 Elle est disponible dans un contexte local ([localhost:8080/admin](localhost:8080/admin)) pour avoir des informations avant de commit du code, notamment :
 - Les métriques (Aperçus > Métriques)
 - Les listes de variables d'environnement (Aperçus > Environnement)

@@ -26,6 +26,14 @@ Pokapi est une api REST Pokémon créée dans le cadre du Master 2 Génie Inform
 
 La documentation de l'API est disponible [ici](https://h-wb.github.io/Pokapi).
 
+Pour utiliser une requête :
+- En local : http://localhost:8080/MAREQUETE
+- En distant : https://groupe3.m2gi.win/MAREQUETE
+
+Exemple : 
+- En local : http://localhost:8080/api/pokemon/all
+- En distant : https://groupe3.m2gi.win/api/pokemon/all
+
 ## Questions & Discussions
 
 Rejoignez notre [Discord](https://discord.gg/9J8avy) pour discuter ou pour du support.
@@ -48,6 +56,12 @@ Clone le projet
 
 ```bash
 $ mvn clean install
+```
+
+Lancer l'application
+
+```bash
+$ mvn spring-boot:run
 ```
 
 ### Pour les collaborateurs officiels
