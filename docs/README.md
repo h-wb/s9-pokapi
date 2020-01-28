@@ -63,7 +63,7 @@ $ mvn spring-boot:run
 
 ### Pour les collaborateurs officiels
 
-Pour les nouveaux collaborateurs rejoignant l'équipe, il est indispensable de suivre [ce guide du développeur](http://localhost:8080/Pokapi/guide/test.html).
+Pour les nouveaux collaborateurs rejoignant l'équipe, il est indispensable de suivre [ce guide du développeur](https://h-wb.github.io/Pokapi/guide/nouveau_dev.html).
 
 
 ## License
