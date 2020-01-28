@@ -231,3 +231,196 @@ Elle est disponible dans un contexte local ([localhost:8080/admin](localhost:808
 
 
 **Si l'application Spring n'est pas visible sur Spring Boot Admin, veuillez ouvrir une issue et indiquez l'erreur ou faites une pull request.**
+
+## Tests
+
+### Cucumber
+
+Plusieurs étapes sont nécessaire à l'élaboration de tests avec **Cucumber**
+
+#### Écrire un scénario
+
+La première étape consiste à écrire un scénario, nommé par exemple `src/test/resources/sommes_nous_vendredi.feature`.
+
+Le contenu de ce scénario pourrait être : 
+
+```
+Feature: Sommes-nous vendredi ?
+
+  Tout le monde veut savoir quand c'est vendredi
+
+  Scenario: Dimanche n'est pas vendredi
+    Given Aujourd'hui nous sommes dimanche
+    When  Je demande si c'est vendredi
+    Then  Je devrais obtenir la réponse "non"
+```
+
+Maintenant que les scénarios sont prêts, utiliser la commande `mvn test` nous permet d'obtenir les fonctions de test manquantes préparées.
+
+```
+You can implement missing steps with the snippets below:
+
+@Given("Aujourd'hui nous sommes dimanche")
+public void aujourd_hui_nous_sommes_dimanche() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+@When("Je demande si c'est vendredi")
+public void je_demande_si_c_est_vendredi() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+@Then("Je devrais obtenir la réponse {string}")
+public void je_devrais_obtenir_la_reponse(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+```
+
+#### Compléter les tests
+
+Maintenant que les tests sont prêts, ils faut les compléter pour les faire passer.
+
+Par exemple : 
+```
+class SommesNousVendredi {
+    static String sommesNousVendredi(String today) {
+        return "vendredi".equals(today) ? "oui" : "non";
+    }
+}
+
+public class Stepdefs {
+    private String today;
+    private String actualAnswer;
+
+    @Given("Aujourd'hui nous sommes dimanche")
+    public void aujourd_hui_nous_sommes_dimanche() {
+        today = "dimanche";
+    }
+    
+    @When("Je demande si c'est vendredi")
+    public void je_demande_si_c_est_vendredi() {
+        actualAnswer = SommesNousVendredi.sommesNousVendredi(today);
+    }
+    
+    @Then("Je devrais obtenir la réponse {string}")
+    public void je_devrais_obtenir_la_reponse(String string) {
+        assertEquals(expectedAnswer, actualAnswer);
+    }
+}
+```
+
+### Mockito
+
+**Mockito** permet de générer automatiquement des objets *mockés*.
+Il permet de tester le comportement des objets réels associés à un ou des objets *mockés* facilitant ainsi l'écriture des tests unitaires.
+
+#### Intégration dans les tests
+
+Il est possible d'intégrer Mockito dans les tests Junit de deux façons :
+1. Ajouter l'annotation @RunWith(MockitoJunitRunner.class) à la classe de test :
+    ```
+    @RunWith(MockitoJunitRunner.class)
+    public class MyTestClass {
+    
+    }
+    ```
+
+2. Faire appel à la méthode initMocks dans la méthode de SetUp :
+
+    ```
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
+    ```
+
+#### Comportement des objets mockés
+
+Le stubbing permet de définir le comportement des objets mockés face aux appels de méthodes sur ces objets.
+Plusieurs méthodes de stubbing sont possibles :
+
+1. Retour d’une valeur unique
+    ```
+        Mockito.when(pokemon.getName()).thenReturn("Bulbizarre"); //la chaîne de caractères Bulbizarre sera renvoyée quand la méthode getName() sera appelée.
+    ```
+
+2. Faire appel à la méthode d’origine
+    ```
+        Mockito.when(pokemon.getName()).thenCallRealMethod();
+    ```
+
+3. Levée d’exceptions
+    ```
+        Mockito.when(pokemon.getName()).thenThrow(new RuntimeException());
+    ```
+
+    Il faut noter que la méthode retournera toujours la valeur stubbée, peu importe combien de fois elle est appelée .
+    Si on stubb la même méthode ayant la même signature plusieurs fois, le dernier stubbing sera pris en compte.
+        
+    ```
+        Mockito.when(pokemon.getName()).ThenThrow(new RuntimeException()).ThenReturn("Carapuce");
+    ```
+    
+    Ici le premier appel va lever une exception, tous les appels qui suivront retourneront "Carapuce".
+   
+4. Retours de valeurs consécutives
+    ```
+        Mockito.when(pokemon.getName()).thenReturn("Bulbizarre", "Salamèche", "Carapuce");
+    ```
+   
+   Le premier appel retourne Bulbizarre, le deuxième retournera Salamèche le troisième Carapuce.
+   Tous les appels qui suivent retourneront la dernière valeur c’est à dire Carapuce.
+
+5. Ne rien retourner
+    ```
+        Mockito.doNothing().when(pokemon.getName());
+    ```
+
+#### Injection
+
+Mockito permet également d’injecter des resources (classes nécessaires au fonctionnement de l’objet mocké), en utilisant l’annotation @InjectMock. 
+
+```
+    @InjectMocks
+    private TypeController typeController;
+
+    @Mock
+    private TypeRepository typeRepository;
+
+    ...
+
+    @Test
+    public void getTypeById() throws ResourceNotFoundException {
+        TypeEntity typeEntity = new TypeEntity();
+        typeEntity.setId(1L);
+
+        when(typeRepository.findById(1L)).thenReturn(java.util.Optional.of(typeEntity));
+
+        ResponseEntity<TypeEntity> returned = typeController.getTypeById(1L);
+
+        verify(typeRepository, times(1)).findById(1L);
+
+        verifyNoMoreInteractions(typeRepository);
+
+        assertEquals(typeEntity, returned.getBody());
+    }
+```
+
+Mockito associé à Junit permet :
+
+- une écriture rapide de tests unitaires
+- de se focaliser sur le comportement de la méthode à tester en mockant les connexions aux bases de données, les appels aux web services, ...
+
+Il ne permet cependant pas de mocker :
+
+- les classes final
+- les enums
+- les méthodes final
+- les méthodes static
+- les méthodes private
+- les méthodes hashCode() et equals()
+
+Les objets mockés doivent aussi être maintenus au fur et à mesure des évolutions du code à tester.
