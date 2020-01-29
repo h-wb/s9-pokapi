@@ -5,7 +5,7 @@
 <h1 align="center">Pokapi</h1>
 
 <p align="center">
-  <a href="https://travis-ci.org/vuex-orm/vuex-orm">
+  <a href="https://travis-ci.com/h-wb/Pokapi/">
     <img src="https://travis-ci.com/h-wb/Pokapi.svg?branch=master" alt="Travis CI">
   </a>
 <a href="https://codecov.io/gh/h-wb/Pokapi">
