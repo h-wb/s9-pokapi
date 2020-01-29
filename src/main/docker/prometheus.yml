@@ -39,7 +39,7 @@ scrape_configs:
       username: 'admin'
       password: 'admin'
     scheme: https
-    metrics_path: '/app/actuator/prometheus'
+    metrics_path: '/actuator/prometheus'
     scrape_interval: 5s
     static_configs:
       - targets: ['groupe3.m2gi.win']
